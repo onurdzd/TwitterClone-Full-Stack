@@ -6,7 +6,7 @@ import RightBar from "./components/RightBar";
 function App() {
   return (
     <>
-      <main className="flex min-h-[100%] container">
+      <main className="flex min-h-[100%] container mx-auto">
         <LeftBar></LeftBar>
         <MiddleBar></MiddleBar>
         <RightBar></RightBar>
