@@ -3,7 +3,6 @@ import RightBarFeed from "../altComponents/RightBarFeed";
 
 const RightBar = () => {
   const [bordered, setBordered] = useState(false);
-  console.log(bordered);
   return (
     <>
       <section className="w-[30%] flex flex-col items-center min-h-[100%]">
