@@ -2,8 +2,9 @@ import owebp from "../assets/O.webp";
 
 const LeftBar = () => {
   return (
-    <><section className="lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
-       <nav className="flex flex-col gap-5 h-[70%] cursor-pointer">
+    <>
+   <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
+        <nav className="flex flex-col gap-4 h-[70%] cursor-pointer">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125 mx-auto">
             <svg width="25" height="25">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
@@ -50,7 +51,9 @@ const LeftBar = () => {
             </svg>
           </div>
           <div className="bg-[#1d9bf0] rounded-full w-fit p-2 mt-3 scale-110 hover:bg-blue-500 mx-auto">
-          <svg width="25" height="25" fill="white"><path d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z"></path></svg>
+            <svg width="25" height="25" fill="white">
+              <path d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z"></path>
+            </svg>
           </div>
         </nav>
         <div className="pb-8 flex items-center gap-2 scale-110">
@@ -60,7 +63,7 @@ const LeftBar = () => {
         </div>
       </section>
 
-      <section className="hidden lg:w-[30%] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
+      <section className="hidden lg:w-[25%] lg:max-w-[350px] max-w-[300px] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
         <nav className="flex flex-col gap-2 h-[70%] cursor-pointer ">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125">
             <svg width="25" height="25">
@@ -115,7 +118,7 @@ const LeftBar = () => {
             </svg>
             Daha Fazla
           </div>
-          <button className="bg-[#1d9bf0] rounded-full p-3 lg:min-w-[233px] text-white font-bold mt-4">
+          <button className="bg-[#1d9bf0] rounded-full p-3 lg:min-w-[200px] text-white font-bold mt-4">
             Gönder
           </button>
         </nav>

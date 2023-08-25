@@ -7,9 +7,22 @@ const MiddleBar = () => {
 
   return (
     <>
-      <section className="lg:w-[40%] w-[85%] sm:w-[60] flex flex-col items-center border-[1px] min-h-[100%]">
+      <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%]">
+      <div className="max-[600px]:px-3 ">
         <div className="flex flex-col w-full h-[100px] border-b-[1px]">
-          <header className="font-bold text-xl tracking-wide pl-5 pt-2">
+          <section className="hidden max-[600px]:flex items-center gap-2 text-xl justify-between pt-2">
+            <div className="flex items-center w-full">
+              <div className="rounded-full">
+                <img src={owebp} className="rounded-full"></img>
+              </div>
+              <div className="max-w-fit hover:bg-slate-100 rounded-full  pr-5 scale-125 mx-auto">
+                <svg width="25" height="25">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+              </div>
+            </div>
+          </section>
+          <header className="max-[600px]:hidden font-bold text-xl tracking-wide pl-5 pt-2">
             Anasayfa
           </header>
           <div className="flex pt-5 gap-3">
@@ -18,7 +31,7 @@ const MiddleBar = () => {
               className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
             >
               <div
-                className={`pb-2  ${
+                className={`max-[600px]:pb-3 pb-2  ${
                   !bordered &&
                   "border-b-[5px] border-b-blue-500 font-bold text-black"
                 }  max-w-fit`}
@@ -33,7 +46,7 @@ const MiddleBar = () => {
               <div
                 className={`pb-2  ${
                   bordered &&
-                  "border-b-[5px] border-b-blue-500 font-bold text-black"
+                  "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
                 }  max-w-fit`}
               >
                 Takip edilenler
@@ -41,7 +54,7 @@ const MiddleBar = () => {
             </div>
           </div>
         </div>
-        <div className="w-full border-b-[1px] pt-4">
+        <div className="w-full border-b-[1px] pt-4 max-[600px]:hidden">
           <div className="flex ">
             <div className="rounded-full min-w-[40px] pt-4 sm:px-4">
               <img src={owebp} className="rounded-full mx-auto"></img>
@@ -85,15 +98,16 @@ const MiddleBar = () => {
                   </div>
                 </div>
                 <div className="pr-2">
-                <button className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold ">
-                  Gönder
-                </button>
+                  <button className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold ">
+                    Gönder
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <Tweets/>
+        <Tweets />
+        </div>
       </section>
     </>
   );
