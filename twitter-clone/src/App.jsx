@@ -6,10 +6,12 @@ import RightBar from "./components/RightBar";
 function App() {
   return (
     <>
-      <main className="flex min-h-[100%] container mx-auto">
+      <main className="flex container mx-auto">
         <LeftBar></LeftBar>
+        <div className="flex justify-end">
         <MiddleBar></MiddleBar>
         <RightBar></RightBar>
+        </div>
       </main>
     </>
   );

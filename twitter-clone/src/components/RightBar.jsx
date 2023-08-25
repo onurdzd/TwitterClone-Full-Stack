@@ -1,5 +1,6 @@
 import { useState } from "react";
-import RightBarFeed from "../altComponents/RightBarFeed";
+import RightBarGundem from "./altComponents/RightBarGundem";
+import RightBarTakipOneri from "./altComponents/RightBarTakipOneri";
 
 const RightBar = () => {
   const [bordered, setBordered] = useState(false);
@@ -11,7 +12,7 @@ const RightBar = () => {
             className={`flex items-center px-4 py-1 ${
               bordered == true &&
               "border-[1px] border-blue-300 py-[3px] px-[15px]"
-            }  bg-slate-100 rounded-full mb-4 mt-2`}
+            }  bg-slate-100 rounded-full mb-4 mt-1`}
           >
             <svg width="30px" height="25px" className="scale-75">
               <path d="M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5s8.5 3.806 8.5 8.5c0 1.986-.682 3.815-1.824 5.262l4.781 4.781-1.414 1.414-4.781-4.781c-1.447 1.142-3.276 1.824-5.262 1.824-4.694 0-8.5-3.806-8.5-8.5z"></path>
@@ -34,12 +35,8 @@ const RightBar = () => {
             </button>
           </div>
         </div>
-        <div className="h-full flex flex-col max-h-[700px] bg-slate-100 w-[350px] mt-5 pl-4 rounded-xl ">
-          <div className=" font-bold text-xl pt-2 pb-5">
-            İlgini çekebilecek gündemler
-          </div>
-          <RightBarFeed></RightBarFeed>
-        </div>
+          <RightBarGundem></RightBarGundem>
+      <RightBarTakipOneri/>
       </section>
     </>
   );

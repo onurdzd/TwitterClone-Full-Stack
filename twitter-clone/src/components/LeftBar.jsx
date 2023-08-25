@@ -3,7 +3,7 @@ import owebp from "../assets/O.webp";
 const LeftBar = () => {
   return (
     <>
-      <section className="w-[30%] flex flex-col items-center gap-2 min-h-[100%] text-xl justify-between">
+      <section className="w-[30%] flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
         <nav className="flex flex-col gap-5 h-[70%] cursor-pointer ">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125">
             <svg width="25" height="25">
@@ -75,10 +75,9 @@ const LeftBar = () => {
                 </svg>
               </span>
             </div>
-            <div className="font-light text-sm">@e_diz</div>
+            <div className="font-light text-sm">@o_diz</div>
           </div>
           <div className="scale-75">
-            {" "}
             <svg width="20" height="25">
               <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
             </svg>
