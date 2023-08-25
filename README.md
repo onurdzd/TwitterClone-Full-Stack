@@ -1,3 +1,3 @@
-Education purpose only. Not recommend for commercial use.
+Created for education purpose.
 
 ![alt text](/twitter-clone/src/assets/mainPage.png)
