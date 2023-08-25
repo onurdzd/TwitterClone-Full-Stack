@@ -67,7 +67,7 @@ const LeftBar = () => {
             <img src={owebp} className="rounded-full"></img>
           </div>
           <div>
-            <div className="font-bold flex text-base">
+            <div className="font-bold flex text-base items-center">
               Onur Dizdar
               <span className="scale-90">
                 <svg width="20" height="25">
