@@ -3,7 +3,7 @@ import owebp from "./../../assets/O.webp";
 const RightBarTakipOneri = () => {
   return (
     <>
-      <main className="flex flex-col h-[300px] bg-slate-100 w-[350px] xl:w-[300px] mt-5 rounded-xl justify-between">
+      <main className="flex flex-col h-[300px] bg-slate-200 w-[300px] xl:w-[350px] mt-5 rounded-xl justify-between">
         <div>
           <div className="font-bold text-xl pt-2 pb-5 pl-3">
             Kimi takip etmeli
