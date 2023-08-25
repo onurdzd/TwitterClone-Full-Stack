@@ -6,7 +6,7 @@ const RightBar = () => {
   const [bordered, setBordered] = useState(false);
   return (
     <>
-      <section className="w-[30%] flex flex-col items-center min-h-[100%]">
+      <section className="w-[30%] max-w-[500px] flex flex-col items-center min-h-[100%]">
         <div className="flex flex-col items-left sm:w-[350px]">
           <div
             className={`flex items-center px-4 py-1 ${
