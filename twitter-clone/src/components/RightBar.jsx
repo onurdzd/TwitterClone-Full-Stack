@@ -6,8 +6,8 @@ const RightBar = () => {
   const [bordered, setBordered] = useState(false);
   return (
     <>
-      <section className="w-[30%] max-w-[500px] flex flex-col items-center min-h-[100%]">
-        <div className="flex flex-col items-left sm:w-[350px]">
+      <section className="hidden lg:flex flex-col lg:w-[30%] max-w-[500px] items-center min-h-[100%]">
+        <div className="flex flex-col items-left w-[300px] xl:w-[350px]">
           <div
             className={`flex items-center px-4 py-1 ${
               bordered == true &&
@@ -30,13 +30,13 @@ const RightBar = () => {
               Yeni özellikleri açmak için abone ol ve uygun olman durumunda
               reklam geliri payı kazan.
             </p>
-            <button className="bg-black rounded-full py-[6px] px-2 mt-3 text-white font-bold sm:w-[100px]">
+            <button className="bg-black rounded-full py-[6px] px-2 mt-3 text-white font-bold lg:w-[100px]">
               Abone Ol
             </button>
           </div>
-        </div>
           <RightBarGundem></RightBarGundem>
-      <RightBarTakipOneri/>
+          <RightBarTakipOneri />
+        </div>
       </section>
     </>
   );

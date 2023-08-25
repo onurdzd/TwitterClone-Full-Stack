@@ -7,7 +7,7 @@ export const Tweets = () => {
       <main className="h-full flex flex-col w-full">
         {/* tweet.map() yapılacak*/}
         <section className="border-b-slate-100 border-b-[1px] pt-3">
-          <div className="px-4">
+          <div className="sm:px-4 px-1">
             <div className="flex w-full pb-2">
               <div className="rounded-full min-w-[40px]">
                 <img src={owebp} className="rounded-full"></img>

@@ -1,7 +1,7 @@
 const RightBarGundem = () => {
   return (
     <>
-      <main className="flex flex-col h-[700px] bg-slate-100 w-[350px] mt-5 rounded-xl ">
+      <main className="flex flex-col lg:h-[700px] bg-slate-100 xl:w-[350px] mt-5 rounded-xl ">
         <div className=" font-bold text-xl pt-2 pb-5 pl-4">
           İlgini çekebilecek gündemler
         </div>

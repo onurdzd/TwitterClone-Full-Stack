@@ -7,7 +7,7 @@ const MiddleBar = () => {
 
   return (
     <>
-      <section className="w-[40%] flex flex-col items-center border-[1px] min-h-[100%]">
+      <section className="lg:w-[40%] w-[85%] sm:w-[60] flex flex-col items-center border-[1px] min-h-[100%]">
         <div className="flex flex-col w-full h-[100px] border-b-[1px]">
           <header className="font-bold text-xl tracking-wide pl-5 pt-2">
             Anasayfa
@@ -43,7 +43,7 @@ const MiddleBar = () => {
         </div>
         <div className="w-full border-b-[1px] pt-4">
           <div className="flex ">
-            <div className="rounded-full w-[70px] p-2 pt-4">
+            <div className="rounded-full min-w-[40px] pt-4 sm:px-4">
               <img src={owebp} className="rounded-full mx-auto"></img>
             </div>
             <div className="w-full">
@@ -85,7 +85,7 @@ const MiddleBar = () => {
                   </div>
                 </div>
                 <div className="pr-2">
-                <button className="bg-[#1d9bf0] rounded-full px-4 py-2 sm:min-w-[50px] text-white font-bold ">
+                <button className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold ">
                   Gönder
                 </button>
                 </div>

@@ -3,7 +3,7 @@ import owebp from "./../../assets/O.webp";
 const RightBarTakipOneri = () => {
   return (
     <>
-      <main className="flex flex-col h-[300px] bg-slate-100 w-[350px] mt-5 rounded-xl justify-between">
+      <main className="flex flex-col h-[300px] bg-slate-100 xl:w-[300px] mt-5 rounded-xl justify-between">
         <div>
           <div className="font-bold text-xl pt-2 pb-5 pl-3">
             Kimi takip etmeli
@@ -21,7 +21,7 @@ const RightBarTakipOneri = () => {
                 <div className="font-light text-sm">@o_diz</div>
               </div>
             </div>
-            <button className="bg-black rounded-full py-[5px]  text-white font-bold sm:w-[100px]">
+            <button className="bg-black rounded-full py-[5px]  text-white font-bold lg:w-[100px]">
               Takip et
             </button>
           </section>
@@ -38,7 +38,7 @@ const RightBarTakipOneri = () => {
                 <div className="font-light text-sm">@o_diz</div>
               </div>
             </div>
-            <button className="bg-black rounded-full py-[5px]  text-white font-bold sm:w-[100px]">
+            <button className="bg-black rounded-full py-[5px]  text-white font-bold lg:w-[100px]">
               Takip et
             </button>
           </section>
