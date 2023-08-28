@@ -16,9 +16,9 @@ const RightBarTakipOneri = () => {
               </div>
               <div>
                 <div className="font-bold flex text-base items-center">
-                  Onur Dizdar
+                  Onur
                 </div>
-                <div className="font-light text-sm">@o_diz</div>
+                <div className="font-light text-sm">@o_tw</div>
               </div>
             </div>
             <button className="bg-black rounded-full py-[5px]  text-white font-bold lg:w-[100px]">
@@ -33,9 +33,9 @@ const RightBarTakipOneri = () => {
               </div>
               <div>
                 <div className="font-bold flex text-base items-center">
-                  Onur Dizdar
+                  Onur
                 </div>
-                <div className="font-light text-sm">@o_diz</div>
+                <div className="font-light text-sm">@o_tw</div>
               </div>
             </div>
             <button className="bg-black rounded-full py-[5px]  text-white font-bold lg:w-[100px]">

@@ -8,7 +8,7 @@ const MiddleBar = () => {
   return (
     <>
       <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%]">
-      <div className="max-[600px]:px-3 ">
+      <div className="max-[600px]:px-3">
         <div className="flex flex-col w-full h-[100px] border-b-[1px]">
           <section className="hidden max-[600px]:flex items-center gap-2 text-xl justify-between pt-2">
             <div className="flex items-center w-full">
@@ -54,15 +54,15 @@ const MiddleBar = () => {
             </div>
           </div>
         </div>
-        <div className="w-full border-b-[1px] pt-4 max-[600px]:hidden">
-          <div className="flex ">
-            <div className="rounded-full min-w-[40px] pt-4 sm:px-4">
-              <img src={owebp} className="rounded-full mx-auto"></img>
+        <div className="w-full border-b-[1px] max-[600px]:hidden ">
+          <div className="flex px-3">
+            <div className="rounded-full min-w-[40px] pt-4">
+              <img src={owebp} className="rounded-full mx-auto "></img>
             </div>
-            <div className="w-full">
+            <div className="w-full ">
               <input
                 placeholder="Neler oluyor?"
-                className=" py-5 text-xl font-light h-[55px] w-full focus:outline-none focus:h-[100px]"
+                className="pl-2 py-5 text-xl font-light h-[55px] w-full focus:outline-none focus:h-[100px]"
               ></input>
               <div className="flex items-center justify-between py-2">
                 <div className="flex gap-1">

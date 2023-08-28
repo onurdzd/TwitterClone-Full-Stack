@@ -1,9 +1,16 @@
+import { useState } from "react";
 import owebp from "../assets/O.webp";
 
 const LeftBar = () => {
+  const [menuOn, setMenuOn] = useState(false);
+
+  const logOut = () => {
+    setMenuOn(false)
+  };
+
   return (
     <>
-   <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
+      <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed" >
         <nav className="flex flex-col gap-4 h-[70%] cursor-pointer">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125 mx-auto">
             <svg width="25" height="25">
@@ -63,7 +70,7 @@ const LeftBar = () => {
         </div>
       </section>
 
-      <section className="hidden lg:w-[25%] lg:max-w-[350px] max-w-[300px] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
+      <section className="hidden lg:w-[25%] lg:max-w-[350px] max-w-[300px] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed" onMouseDown={()=>setMenuOn(false)}>
         <nav className="flex flex-col gap-2 h-[70%] cursor-pointer ">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125">
             <svg width="25" height="25">
@@ -122,28 +129,77 @@ const LeftBar = () => {
             Gönder
           </button>
         </nav>
-        <div className="pb-8 flex items-center gap-2">
-          <div className="rounded-full">
+        <div
+          id="menu-container"
+          className="mb-2 flex items-center py-3 px-5 rounded-full gap-2 hover:bg-slate-200 cursor-pointer"
+          onClick={() => setMenuOn(true)}
+        >
+          <div className="rounded-full w-[35px] ">
             <img src={owebp} className="rounded-full"></img>
           </div>
-          <div>
-            <div className="font-bold flex text-base items-center">
-              Onur
-              <span className="scale-90">
-                <svg width="20" height="25">
-                  <path d="M17.5 7H17v-.25c0-2.76-2.24-5-5-5s-5 2.24-5 5V7h-.5C5.12 7 4 8.12 4 9.5v9C4 19.88 5.12 21 6.5 21h11c1.39 0 2.5-1.12 2.5-2.5v-9C20 8.12 18.89 7 17.5 7zM13 14.73V17h-2v-2.27c-.59-.34-1-.99-1-1.73 0-1.1.9-2 2-2 1.11 0 2 .9 2 2 0 .74-.4 1.39-1 1.73zM15 7H9v-.25c0-1.66 1.35-3 3-3 1.66 0 3 1.34 3 3V7z"></path>
-                </svg>
-              </span>
+          <div className="flex justify-between w-[125px] items-center">
+            <div>
+              <div className="font-bold flex text-base items-center">
+                Onur
+                <span className="scale-90">
+                  <svg width="20" height="25">
+                    <path d="M17.5 7H17v-.25c0-2.76-2.24-5-5-5s-5 2.24-5 5V7h-.5C5.12 7 4 8.12 4 9.5v9C4 19.88 5.12 21 6.5 21h11c1.39 0 2.5-1.12 2.5-2.5v-9C20 8.12 18.89 7 17.5 7zM13 14.73V17h-2v-2.27c-.59-.34-1-.99-1-1.73 0-1.1.9-2 2-2 1.11 0 2 .9 2 2 0 .74-.4 1.39-1 1.73zM15 7H9v-.25c0-1.66 1.35-3 3-3 1.66 0 3 1.34 3 3V7z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div className="font-light text-sm">@o_tw</div>
             </div>
-            <div className="font-light text-sm">@o_tw</div>
-          </div>
-          <div className="scale-75">
-            <svg width="20" height="25">
-              <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
-            </svg>
+            <div className="scale-75 ">
+              <svg width="20" height="25">
+                <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
+              </svg>
+            </div>
           </div>
         </div>
       </section>
+      {menuOn && (
+        <div className="w-[300px] py-3 fixed z-10 bg-white shadow-[15px_25px_90px_10px_rgba(0,0,0,0.2)] bottom-[90px] rounded-2xl" >
+          <div className="flex flex-col ">
+            <div className="border-b-[1px]">
+              <div className="mb-2 flex items-center gap-2 p-3 ">
+                <div className="rounded-full w-[35px]">
+                  <img src={owebp} className="rounded-full"></img>
+                </div>
+                <div className="flex justify-between w-full items-center">
+                  <div>
+                    <div className="font-bold flex text-base items-center ">
+                      Onur
+                      <span className="scale-90">
+                        <svg width="20" height="25">
+                          <path d="M17.5 7H17v-.25c0-2.76-2.24-5-5-5s-5 2.24-5 5V7h-.5C5.12 7 4 8.12 4 9.5v9C4 19.88 5.12 21 6.5 21h11c1.39 0 2.5-1.12 2.5-2.5v-9C20 8.12 18.89 7 17.5 7zM13 14.73V17h-2v-2.27c-.59-.34-1-.99-1-1.73 0-1.1.9-2 2-2 1.11 0 2 .9 2 2 0 .74-.4 1.39-1 1.73zM15 7H9v-.25c0-1.66 1.35-3 3-3 1.66 0 3 1.34 3 3V7z"></path>
+                        </svg>
+                      </span>
+                    </div>
+                    <div className="font-light text-sm">@o_tw</div>
+                  </div>
+                  <div className="scale-75 cursor-pointer pr-2">
+                    <svg width="22" height="25" fill="#00ba7c">
+                      <path d="M12 1.75C6.34 1.75 1.75 6.34 1.75 12S6.34 22.25 12 22.25 22.25 17.66 22.25 12 17.66 1.75 12 1.75zm-.81 14.68l-4.1-3.27 1.25-1.57 2.47 1.98 3.97-5.47 1.62 1.18-5.21 7.15z"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="font-bold mt-5 py-2 pl-3 hover:bg-slate-100 cursor-pointer">
+              Var olan bir hesap ekle
+            </div>
+            <div className="font-bold py-2 pl-3 hover:bg-slate-100 cursor-pointer">
+              Hesapları yönet
+            </div>
+            <div
+              onClick={logOut}
+              className="font-bold py-2 pl-3 mb-5 hover:bg-slate-100 cursor-pointer"
+            >
+              @o_tw hesabından çıkış yap
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
