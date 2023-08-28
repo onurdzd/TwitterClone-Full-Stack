@@ -1,11 +1,26 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import LeftBar from "./components/LeftBar";
 import { Messages } from "./components/Messages";
 import MiddleBar from "./components/MiddleBar";
 import RightBar from "./components/RightBar";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const [loginStatus,setLoginStatus]=useState(true)
+
+  const navigate=useNavigate("/login")
+
+  useEffect(()=>{
+    if(!loginStatus){
+    alert("Önce login olmalısın!")
+      navigate("/login")
+    }
+  },[loginStatus])
+
   return (
+    <>
+    {loginStatus ? 
     <>
       <main className="max-[600px]:hidden flex container mx-auto">
         <header>
@@ -55,6 +70,9 @@ function App() {
             </svg>
           </div>
       </main>
+      </>
+      :<div className="flex justify-center font-bold flex-col w-full h-[500px] items-center">
+        <div>Önce Login olmalısın</div></div>}
     </>
   );
 }
