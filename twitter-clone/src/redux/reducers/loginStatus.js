@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const loginStatusSlice = createSlice({
   name: 'loginStatus',
+  //backend yapılınca burası false başlayabilir
   initialState: {
     value: true
   },

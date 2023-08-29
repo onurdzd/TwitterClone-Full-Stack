@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import "./App.css";
 import LeftBar from "./components/LeftBar";
 import { Messages } from "./components/Messages";
 import MiddleBar from "./components/MiddleBar";
 import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector} from 'react-redux'
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
       alert("Önce login olmalısın!");
       navigate("/login");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginStatus]);
 
   return (
