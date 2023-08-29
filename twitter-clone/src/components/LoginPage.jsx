@@ -27,17 +27,17 @@ export const LoginPage = () => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <input
-                placeholder="Username"
+                placeholder="Kullanıcı Adı"
                 className="border-[1px] p-2"
                 {...register("username", {
                   required: "This is required.",
                   maxLength: {
                     value: 10,
-                    message: "Username shouldn't exceed 10 characters.",
+                    message: "Kullanıcı Adı 10 karakterden fazla olamaz.",
                   },
                   minLength: {
                     value: 4,
-                    message: "Username should more then 4 characters.",
+                    message: "Kullanıcı Adı 4 karakterden az olamaz.",
                   },
                 })}
               />
@@ -45,30 +45,30 @@ export const LoginPage = () => {
                 <ErrorMessage errors={errors} name="username" />
               </div>
               <input
-                placeholder="Password"
+                placeholder="Şifre"
                 type="password"
                 className="border-[1px] p-2"
                 {...register("password", {
                   required: "This is required.",
                   maxLength: {
                     value: 10,
-                    message: "Password shouldn't exceed 10 characters.",
+                    message: "Şifre 10 karakterden fazla olamaz.",
                   },
                   minLength: {
                     value: 4,
-                    message: "Password should more then 4 characters.",
+                    message: "Şifre 4 karakterden az olamaz.",
                   },
                 })}
               />
               <div className="text-red-600 font-semibold">
                 <ErrorMessage errors={errors} name="password" />
               </div>
-              <button placeholder="Next"
+              <button 
                 className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-900"
                 type="submit"
-              >Next</button>
+              >İlerle</button>
               <button className="text-black bg-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
-                Forgot password?
+                Şifremi unuttum
               </button>
             </form>
           </div>

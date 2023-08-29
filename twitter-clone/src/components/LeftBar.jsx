@@ -1,16 +1,12 @@
 import { useState } from "react";
 import owebp from "../assets/O.webp";
 
-const LeftBar = () => {
+const LeftBar = ({ logOut }) => {
   const [menuOn, setMenuOn] = useState(false);
-
-  const logOut = () => {
-    setMenuOn(false)
-  };
 
   return (
     <>
-      <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed" >
+      <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
         <nav className="flex flex-col gap-4 h-[70%] cursor-pointer">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125 mx-auto">
             <svg width="25" height="25">
@@ -70,7 +66,10 @@ const LeftBar = () => {
         </div>
       </section>
 
-      <section className="hidden lg:w-[25%] lg:max-w-[350px] max-w-[300px] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed" onMouseDown={()=>setMenuOn(false)}>
+      <section
+        className="hidden lg:w-[25%] lg:max-w-[350px] max-w-[300px] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed"
+        onMouseDown={() => setMenuOn(false)}
+      >
         <nav className="flex flex-col gap-2 h-[70%] cursor-pointer ">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125">
             <svg width="25" height="25">
@@ -158,7 +157,7 @@ const LeftBar = () => {
         </div>
       </section>
       {menuOn && (
-        <div className="w-[300px] py-3 fixed z-10 bg-white shadow-[15px_25px_90px_10px_rgba(0,0,0,0.2)] bottom-[90px] rounded-2xl" >
+        <div className="w-[300px] py-3 fixed z-10 bg-white shadow-[15px_25px_90px_10px_rgba(0,0,0,0.2)] bottom-[90px] rounded-2xl">
           <div className="flex flex-col ">
             <div className="border-b-[1px]">
               <div className="mb-2 flex items-center gap-2 p-3 ">
@@ -192,7 +191,10 @@ const LeftBar = () => {
               Hesapları yönet
             </div>
             <div
-              onClick={logOut}
+              onClick={() => {
+                setMenuOn(false);
+                logOut();
+              }}
               className="font-bold py-2 pl-3 mb-5 hover:bg-slate-100 cursor-pointer"
             >
               @o_tw hesabından çıkış yap
