@@ -1,8 +1,11 @@
 import { useState } from "react";
 import owebp from "../assets/O.webp";
+import { useDispatch } from 'react-redux'
+import { logOut } from '../redux/reducers/loginStatus'
 
-const LeftBar = ({ logOut }) => {
+const LeftBar = () => {
   const [menuOn, setMenuOn] = useState(false);
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -191,10 +194,7 @@ const LeftBar = ({ logOut }) => {
               Hesapları yönet
             </div>
             <div
-              onClick={() => {
-                setMenuOn(false);
-                logOut();
-              }}
+              onClick={() => dispatch(logOut())}
               className="font-bold py-2 pl-3 mb-5 hover:bg-slate-100 cursor-pointer"
             >
               @o_tw hesabından çıkış yap

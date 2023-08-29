@@ -1,5 +1,8 @@
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useDispatch } from 'react-redux'
+import { logIn } from '../redux/reducers/loginStatus'
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
   const {
@@ -10,6 +13,9 @@ export const LoginPage = () => {
     clearErrors
   } = useForm({mode:"onChange"});
   const onSubmit = (data) => reset();
+
+  const dispatch = useDispatch()
+  const navigate=useNavigate()
 
   return (
     <>
@@ -66,6 +72,7 @@ export const LoginPage = () => {
               <button 
                 className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-900"
                 type="submit"
+                onClick={()=>{dispatch(logIn()),navigate("/")}}
               >İlerle</button>
               <button className="text-black bg-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
                 Şifremi unuttum

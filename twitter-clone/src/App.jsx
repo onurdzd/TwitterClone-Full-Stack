@@ -5,11 +5,12 @@ import { Messages } from "./components/Messages";
 import MiddleBar from "./components/MiddleBar";
 import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
 
 function App() {
-  const [loginStatus, setLoginStatus] = useState(true);
 
   const navigate = useNavigate();
+  const loginStatus = useSelector(state => state.loginStatus.value)
 
   useEffect(() => {
     if (!loginStatus) {
@@ -17,11 +18,6 @@ function App() {
       navigate("/login");
     }
   }, [loginStatus]);
-
-  const logOut = () => {
-    setLoginStatus(false);
-    console.log("Çıkış yapıldı!");
-  };
 
   return (
     <>
@@ -42,7 +38,7 @@ function App() {
 
           <main className="hidden max-[600px]:flex flex-col container mx-auto">
             <header>
-              <LeftBar logOut={logOut}></LeftBar>
+              <LeftBar ></LeftBar>
             </header>
             <main className="flex justify-center">
               <MiddleBar></MiddleBar>
