@@ -1,10 +1,30 @@
 import { useState } from "react";
 import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
+import axios from "axios"
 
 const MiddleBar = () => {
   const [bordered, setBordered] = useState(false);
 
+  //backend url sine istek atan herkes sonuçları alabilecek çözüm bul
+  const sendTweet=()=>{
+    try {
+      let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: `${import.meta.env.VITE_API_URL}user`,
+        headers: {}
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <>
       <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%]">
@@ -98,7 +118,7 @@ const MiddleBar = () => {
                   </div>
                 </div>
                 <div className="pr-2">
-                  <button className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold ">
+                  <button onClick={sendTweet} className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold ">
                     Gönder
                   </button>
                 </div>
