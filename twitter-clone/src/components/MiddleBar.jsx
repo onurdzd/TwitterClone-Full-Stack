@@ -6,7 +6,7 @@ import axios from "axios"
 const MiddleBar = () => {
   const [bordered, setBordered] = useState(false);
 
-  //backend url sine istek atan herkes sonuçları alabilecek çözüm bul
+  //backend url sine istek atan herkes sonuçları alabilecek çözüm bul,jwt ekle
   const sendTweet=()=>{
     try {
       let config = {

@@ -1,23 +1,23 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import "./App.css";
 import LeftBar from "./components/LeftBar";
 import { Messages } from "./components/Messages";
 import MiddleBar from "./components/MiddleBar";
 import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
-import { useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
+
 
 function App() {
-
   const navigate = useNavigate();
-  const loginStatus = useSelector(state => state.loginStatus.value)
+  const loginStatus = useSelector((state) => state.loginStatus.value);
 
   useEffect(() => {
     if (!loginStatus) {
       alert("Önce login olmalısın!");
       navigate("/login");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginStatus]);
 
   return (
@@ -39,7 +39,7 @@ function App() {
 
           <main className="hidden max-[600px]:flex flex-col container mx-auto">
             <header>
-              <LeftBar ></LeftBar>
+              <LeftBar></LeftBar>
             </header>
             <main className="flex justify-center">
               <MiddleBar></MiddleBar>

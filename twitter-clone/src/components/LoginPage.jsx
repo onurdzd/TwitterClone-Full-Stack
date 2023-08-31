@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useDispatch } from 'react-redux'
-import { logIn } from '../redux/reducers/loginStatus'
+import { useDispatch } from "react-redux";
+import { logIn } from "../redux/reducers/loginStatus";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const LoginPage = () => {
   const {
@@ -10,16 +12,44 @@ export const LoginPage = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    clearErrors
-  } = useForm({mode:"onChange"});
-  const onSubmit = (data) => reset();
+    clearErrors,
+  } = useForm({ mode: "onChange" });
 
-  const dispatch = useDispatch()
-  const navigate=useNavigate()
+  const loginSuccess = () => toast("Giriş başarılı!");
+  const loginFailed = (failedCode) => toast(failedCode);
+
+  const onSubmit = (data) => {
+    axios
+      .post(`${import.meta.env.VITE_API_URL}user/login`, {
+        username: data.username,
+        password: data.password,
+      })
+      .then((response) => {
+        if (response.status == 200) {
+          dispatch(logIn());
+          navigate("/");
+          reset();
+          loginSuccess();
+        } else {
+          reset();
+          loginFailed(response.data);
+        }
+      })
+      .catch((error) => {
+        reset();
+        loginFailed(error.response.data);
+      });
+  };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <>
-      <div className="flex flex-col justify-center h-full" onMouseDown={()=>clearErrors()}>
+      <div
+        className="flex flex-col justify-center h-full"
+        onMouseDown={() => clearErrors()}
+      >
         <div className="w-[400px] h-[400px] py-5 mx-auto ">
           <div className="flex flex-col items-center justify-center gap-5 border-[2px] p-10">
             <div>
@@ -42,8 +72,8 @@ export const LoginPage = () => {
                     message: "Kullanıcı Adı 10 karakterden fazla olamaz.",
                   },
                   minLength: {
-                    value: 4,
-                    message: "Kullanıcı Adı 4 karakterden az olamaz.",
+                    value: 3,
+                    message: "Kullanıcı Adı 3 karakterden az olamaz.",
                   },
                 })}
               />
@@ -61,19 +91,20 @@ export const LoginPage = () => {
                     message: "Şifre 10 karakterden fazla olamaz.",
                   },
                   minLength: {
-                    value: 4,
-                    message: "Şifre 4 karakterden az olamaz.",
+                    value: 3,
+                    message: "Şifre 3 karakterden az olamaz.",
                   },
                 })}
               />
               <div className="text-red-600 font-semibold">
                 <ErrorMessage errors={errors} name="password" />
               </div>
-              <button 
+              <button
                 className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-900"
                 type="submit"
-                onClick={()=>{dispatch(logIn()),navigate("/")}}
-              >İlerle</button>
+              >
+                İlerle
+              </button>
               <button className="text-black bg-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
                 Şifremi unuttum
               </button>
