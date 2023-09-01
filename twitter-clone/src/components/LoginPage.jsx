@@ -17,12 +17,12 @@ export const LoginPage = () => {
 
   const loginSuccess = () => toast("Giriş başarılı!");
   const loginFailed = (failedCode) => toast(failedCode);
-
+  
   const onSubmit = (data) => {
     axios
       .post(`${import.meta.env.VITE_API_URL}user/login`, {
-        username: data.username,
-        password: data.password,
+        username: data.username.trim(),
+        password: data.password.trim(),
       })
       .then((response) => {
         if (response.status == 200) {
@@ -32,12 +32,13 @@ export const LoginPage = () => {
           loginSuccess();
         } else {
           reset();
-          loginFailed(response.data);
+          loginFailed("Giriş başarısız");
         }
       })
       .catch((error) => {
+        console.log(error)
+        loginFailed("Giriş başarısız");
         reset();
-        loginFailed(error.response.data);
       });
   };
 

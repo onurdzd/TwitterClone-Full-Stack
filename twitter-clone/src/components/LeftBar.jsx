@@ -2,10 +2,12 @@ import { useState } from "react";
 import owebp from "../assets/O.webp";
 import { useDispatch } from 'react-redux'
 import { logOut } from '../redux/reducers/loginStatus'
+import { useNavigate } from "react-router-dom";
 
 const LeftBar = () => {
   const [menuOn, setMenuOn] = useState(false);
   const dispatch = useDispatch()
+  const navigate=useNavigate()
 
   return (
     <>
@@ -79,7 +81,7 @@ const LeftBar = () => {
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
             </svg>
           </div>
-          <div className="max-w-fit hover:bg-slate-100 rounded-full flex items-center px-4 py-2 font-bold">
+          <div onClick={()=>navigate("/")} className="max-w-fit hover:bg-slate-100 rounded-full flex items-center px-4 py-2 font-bold">
             <svg width="40" height="25">
               <path d="M12 1.696L.622 8.807l1.06 1.696L3 9.679V19.5C3 20.881 4.119 22 5.5 22h13c1.381 0 2.5-1.119 2.5-2.5V9.679l1.318.824 1.06-1.696L12 1.696zM12 16.5c-1.933 0-3.5-1.567-3.5-3.5s1.567-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.567 3.5-3.5 3.5z"></path>
             </svg>

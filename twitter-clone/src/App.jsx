@@ -7,17 +7,16 @@ import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-
 function App() {
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
 
+  //login olduktan sonra user datayı aşağıdan çek token kullanarak
   useEffect(() => {
     if (!loginStatus) {
       alert("Önce login olmalısın!");
       navigate("/login");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginStatus]);
 
   return (
