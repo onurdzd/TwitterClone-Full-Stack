@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { logOut } from '../redux/reducers/loginStatus'
 import { useNavigate } from "react-router-dom";
 import { removeLocalId } from "../redux/reducers/localId";
+import { removeLocalToken } from "../redux/reducers/localToken";
 
 const LeftBar = () => {
   const [menuOn, setMenuOn] = useState(false);
@@ -18,7 +19,7 @@ const LeftBar = () => {
     return () => {
       window.removeEventListener('click', handleClickOutside);
     }},[menuOn])  
-console.log(menuOn)
+
   return (
     <>
       <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
@@ -205,7 +206,7 @@ console.log(menuOn)
               Hesapları yönet
             </div>
             <div
-              onClick={() => {dispatch(logOut());dispatch(removeLocalId())}}
+              onClick={() => {dispatch(logOut());dispatch(removeLocalToken());dispatch(removeLocalId())}}
               className="font-bold py-2 pl-3 mb-5 hover:bg-slate-100 cursor-pointer"
             >
               @o_tw hesabından çıkış yap

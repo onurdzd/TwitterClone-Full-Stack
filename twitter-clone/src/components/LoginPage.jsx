@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { setLocalId } from "../redux/reducers/localId";
+import { setLocalToken } from "../redux/reducers/localToken";
 
 export const LoginPage = () => {
   const {
@@ -41,9 +42,8 @@ export const LoginPage = () => {
           dispatch(logIn());
           navigate("/");
           reset();
-          localStorage.setItem("jwtToken",response.data.token)
+          dispatch(setLocalToken(response.data.token))
           loginSuccess();
-          localStorage.setItem("localId",response.data.id)
           dispatch(setLocalId(response.data.id))
         } else {
           reset();

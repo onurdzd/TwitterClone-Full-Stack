@@ -7,10 +7,11 @@ export const localIdSlice = createSlice({
   },
   reducers: {
     setLocalId:(state,action)=>{
-      state.value=action.payload;
+      state.value=localStorage.setItem("localId",action.payload)
+
     },
     removeLocalId:state=>{
-      state.value="";
+      state.value=localStorage.removeItem("localId");
     }
   }
 })

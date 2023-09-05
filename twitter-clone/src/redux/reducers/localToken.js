@@ -7,10 +7,10 @@ export const localTokenSlice = createSlice({
   },
   reducers: {
     setLocalToken:(state,action)=>{
-      state.value=action.payload;
+      state.value=localStorage.setItem("jwtToken",action.payload)
     },
     removeLocalToken:state=>{
-      state.value="";
+      state.value=localStorage.removeItem("jwtToken")
     }
   }
 })
