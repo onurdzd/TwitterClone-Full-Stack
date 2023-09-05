@@ -30,7 +30,7 @@ export const Tweets = ({ tweet }) => {
                     <div className="font-light text-sm max-[600px]:text-xs text-slate-500">
                       {tweet.userId}
                     </div>
-                  <div className="font-light text-sm max-[600px]:text-xs text-slate-500 ml-3">{formatDistanceToNowStrict(inputDate,{locale:tr}).substring(0,4)}</div>
+                  <div className="font-light text-sm max-[600px]:text-xs text-slate-500 ml-3"><span className="mr-1 font-bold">·</span>{formatDistanceToNowStrict(inputDate,{locale:tr}).substring(0,4)}</div>
                   </div>
                   <div className="max-h-[568px]">{tweet.tweetText}</div>
                   <div className="flex py-2 w-full justify-between sm:justify-start sm:gap-10">

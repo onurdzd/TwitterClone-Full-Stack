@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import owebp from "../assets/O.webp";
 import { useDispatch } from 'react-redux'
 import { logOut } from '../redux/reducers/loginStatus'
@@ -10,6 +10,15 @@ const LeftBar = () => {
   const dispatch = useDispatch()
   const navigate=useNavigate()
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      !event.target.closest('#menu-container') && setMenuOn(false)
+    }
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    }},[menuOn])  
+console.log(menuOn)
   return (
     <>
       <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed">
@@ -74,7 +83,6 @@ const LeftBar = () => {
 
       <section
         className="hidden lg:w-[25%] lg:max-w-[350px] max-w-[300px] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed"
-        onMouseDown={() => setMenuOn(false)}
       >
         <nav className="flex flex-col gap-2 h-[70%] cursor-pointer ">
           <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125">
