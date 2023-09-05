@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const MiddleBar = () => {
   const [bordered, setBordered] = useState(false);
   const [tweets, setTweets] = useState([]);
+  const [textedTweet, setTextedTweet] = useState("");
+  const localId = useSelector((state) => state.localId.value);
 
-  useEffect(() => {
-    getTweets();
-  }, []);
+  const tweetSend=() => toast("Tweet Gönderildi!");
 
   const getTweets = async () => {
     await axios
@@ -22,23 +24,24 @@ const MiddleBar = () => {
 
   //backend url sine istek atan herkes sonuçları alabilecek çözüm bul,jwt ekle
   const sendTweet = () => {
-    try {
-      let config = {
-        method: "get",
-        maxBodyLength: Infinity,
-        url: `${import.meta.env.VITE_API_URL}user`,
-        headers: {},
-      };
-
-      axios.request(config).then((response) => {
-        console.log(JSON.stringify(response.data));
+    setTextedTweet("")
+    axios
+      .post(`${import.meta.env.VITE_API_URL}tweet`, {
+        userId: localId,
+        tweetText: textedTweet,
+      })
+      .then((response) => {
+        tweetSend()
+        getTweets()
       });
-    } catch (error) {
-      console.log(error);
-    }
   };
 
-  return (
+  useEffect(() => {
+    getTweets();
+  }, []);
+
+
+return (
     <>
       <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%]">
         <div className="max-[600px]:px-3 w-full">
@@ -92,11 +95,13 @@ const MiddleBar = () => {
               <div className="rounded-full min-w-[40px] pt-4">
                 <img src={owebp} className="rounded-full mx-auto "></img>
               </div>
-              <div className="w-full ">
-                <input
+              <div className="w-full">
+                  <input
+                  value={textedTweet}
+                  onChange={e=>setTextedTweet(e.target.value)}
                   placeholder="Neler oluyor?"
-                  className="pl-2 py-5 text-xl font-light h-[55px] w-full focus:outline-none focus:h-[100px]"
-                ></input>
+                  className="pl-2 py-5 text-xl font-light h-[60px] w-full focus:outline-none focus:h-[100px]"
+                  ></input>
                 <div className="flex items-center justify-between py-2">
                   <div className="flex gap-1">
                     <div className="scale-90 hover:bg-blue-100 cursor-pointer rounded-full p-[7px]">
@@ -131,9 +136,9 @@ const MiddleBar = () => {
                     </div>
                   </div>
                   <div className="pr-2">
-                    <button
+                    <button disabled={textedTweet==""}
                       onClick={sendTweet}
-                      className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold "
+                      className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold disabled:bg-blue-300"
                     >
                       Gönder
                     </button>
@@ -142,7 +147,9 @@ const MiddleBar = () => {
               </div>
             </div>
           </div>
-          {tweets?.map((tweet,index) => (
+          {[...tweets].sort((a, b) => {
+      return new Date(b.tweetCreatedAt) - new Date(a.tweetCreatedAt);
+    }).map((tweet, index) => (
             <div key={index}>
               <Tweets tweet={tweet}></Tweets>
             </div>

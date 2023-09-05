@@ -3,6 +3,7 @@ import owebp from "../assets/O.webp";
 import { useDispatch } from 'react-redux'
 import { logOut } from '../redux/reducers/loginStatus'
 import { useNavigate } from "react-router-dom";
+import { removeLocalId } from "../redux/reducers/localId";
 
 const LeftBar = () => {
   const [menuOn, setMenuOn] = useState(false);
@@ -196,7 +197,7 @@ const LeftBar = () => {
               Hesapları yönet
             </div>
             <div
-              onClick={() => dispatch(logOut())}
+              onClick={() => {dispatch(logOut());dispatch(removeLocalId())}}
               className="font-bold py-2 pl-3 mb-5 hover:bg-slate-100 cursor-pointer"
             >
               @o_tw hesabından çıkış yap

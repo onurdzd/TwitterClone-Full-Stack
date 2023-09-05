@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const localIdSlice = createSlice({
-  name: 'localToken',
+  name: 'localId',
   initialState: {
-    value: ""
+    value: localStorage.getItem("localId")
   },
   reducers: {
     setLocalId:(state,action)=>{

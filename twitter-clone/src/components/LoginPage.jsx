@@ -43,6 +43,7 @@ export const LoginPage = () => {
           reset();
           localStorage.setItem("jwtToken",response.data.token)
           loginSuccess();
+          localStorage.setItem("localId",response.data.id)
           dispatch(setLocalId(response.data.id))
         } else {
           reset();
