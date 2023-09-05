@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const localTokenSlice = createSlice({
   name: 'localToken',
   initialState: {
-    value: localStorage.getItem("jwtToken")
+    value:true
   },
   reducers: {
     setLocalToken:(state,action)=>{

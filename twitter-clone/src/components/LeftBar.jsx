@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import owebp from "../assets/O.webp";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { logOut } from '../redux/reducers/loginStatus'
 import { useNavigate } from "react-router-dom";
 import { removeLocalId } from "../redux/reducers/localId";
@@ -139,7 +139,7 @@ const LeftBar = () => {
             </svg>
             Daha Fazla
           </div>
-          <button className="bg-[#1d9bf0] rounded-full p-3 lg:min-w-[200px] text-white font-bold mt-4">
+          <button className={`bg-[#1d9bf0] rounded-full p-3 lg:min-w-[200px] text-white font-bold mt-4 $`}>
             Gönder
           </button>
         </nav>

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { tweetButtonActive, tweetButtonPassive } from "../redux/reducers/tweetButton";
 
 const MiddleBar = () => {
   const [bordered, setBordered] = useState(false);
@@ -11,6 +12,7 @@ const MiddleBar = () => {
   const [textedTweet, setTextedTweet] = useState("");
   const localId = useSelector((state) => state.localId.value);
 
+  const dispatch=useDispatch()
   const tweetSend=() => toast("Tweet Gönderildi!");
 
   const getTweets = async () => {
@@ -97,7 +99,7 @@ return (
               <div className="w-full">
                   <input
                   value={textedTweet}
-                  onChange={e=>setTextedTweet(e.target.value)}
+                  onChange={e=>{setTextedTweet(e.target.value)}}
                   placeholder="Neler oluyor?"
                   className="pl-2 py-5 text-xl font-light h-[60px] w-full focus:outline-none focus:h-[100px]"
                   ></input>
