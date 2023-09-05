@@ -5,6 +5,7 @@ import { logIn } from "../redux/reducers/loginStatus";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { setLocalId } from "../redux/reducers/localId";
 
 export const LoginPage = () => {
   const {
@@ -17,32 +18,44 @@ export const LoginPage = () => {
 
   const loginSuccess = () => toast("Giriş başarılı!");
   const loginFailed = (failedCode) => toast(failedCode);
-  
+  const dispatch=useDispatch();
+
   const onSubmit = (data) => {
+    axios.defaults.withCredentials = true;
+
     axios
-      .post(`${import.meta.env.VITE_API_URL}user/login`, {
-        username: data.username.trim(),
-        password: data.password.trim(),
-      })
+      .post(
+        `${import.meta.env.VITE_API_URL}user/login`,
+        {
+          username: data.username.trim(),
+          password: data.password.trim(),
+        },{
+          withCredentials: true,
+          headers:{
+            "Content-Type": "application/json",
+          }
+        }
+      )
       .then((response) => {
         if (response.status == 200) {
           dispatch(logIn());
           navigate("/");
           reset();
+          localStorage.setItem("jwtToken",response.data.token)
           loginSuccess();
+          dispatch(setLocalId(response.data.id))
         } else {
           reset();
           loginFailed("Giriş başarısız");
         }
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         loginFailed("Giriş başarısız");
         reset();
       });
   };
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (

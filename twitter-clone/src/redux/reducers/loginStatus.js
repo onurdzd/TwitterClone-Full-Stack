@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const loginStatusSlice = createSlice({
   name: 'loginStatus',
-  //backend yapılınca burası false başlayabilir
   initialState: {
-    value: true
+  //authentication eklenecek 
+    value: localStorage.getItem("jwtToken") ? true : false 
   },
   reducers: {
     logOut:state=>{
@@ -12,10 +12,12 @@ export const loginStatusSlice = createSlice({
     },
     logIn:state=>{
       state.value=true;
-    }
+    },
+    checkLoginStatus:(state,action)=>
+      state.value=action.payload
   }
 })
 
-export const { logOut ,logIn} = loginStatusSlice.actions
+export const { logOut ,logIn,checkLoginStatus} = loginStatusSlice.actions
 
 export default loginStatusSlice.reducer

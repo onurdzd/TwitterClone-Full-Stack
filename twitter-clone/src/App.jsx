@@ -10,8 +10,7 @@ import { useSelector } from "react-redux";
 function App() {
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
-
-  //login olduktan sonra user datayı aşağıdan çek token kullanarak
+  
   useEffect(() => {
     if (!loginStatus) {
       alert("Önce login olmalısın!");
@@ -23,7 +22,7 @@ function App() {
     <>
       {loginStatus ? (
         <>
-          <main className="max-[600px]:hidden flex container mx-auto">
+          <main className="max-[600px]:hidden container mx-auto w-full">
             <header>
               <LeftBar></LeftBar>
             </header>
