@@ -1,17 +1,22 @@
+import { tr } from "date-fns/locale";
 import mercedes from "./../../assets/mercedes.jpeg";
 import owebp from "./../../assets/O.webp";
+import { formatDistanceToNowStrict } from 'date-fns'
 
 export const Tweets = ({ tweet }) => {
+  const inputDateString = tweet.tweetCreatedAt;
+  const inputDate = new Date(inputDateString);
+
   return (
     <>
       <main className="h-full flex flex-col w-full">
-        <section className="border-b-slate-100 border-b-[1px] pt-3 ">
-          <div className="sm:px-4 px-1 max-[600px]:px-0">
+        <section className="border-b-slate-100 border-b-[1px] pt-3 w-full">
+          <div className="sm:px-4 px-1 max-[600px]:px-0 w-full">
             <div className="flex w-full pb-2">
               <div className="rounded-full min-w-[40px] max-[600px]:pt-2">
                 <img src={owebp} className="rounded-full"></img>
               </div>
-              <div>
+              <div className="w-full">
                 <div className="flex flex-col pl-2">
                   <div className="flex items-center">
                     <div className="font-bold flex text-base items-center">
@@ -25,9 +30,10 @@ export const Tweets = ({ tweet }) => {
                     <div className="font-light text-sm max-[600px]:text-xs text-slate-500">
                       {tweet.userId}
                     </div>
+                  <div className="font-light text-sm max-[600px]:text-xs text-slate-500 ml-3">{formatDistanceToNowStrict(inputDate,{locale:tr}).substring(0,4)}</div>
                   </div>
                   <div className="max-h-[568px]">{tweet.tweetText}</div>
-                  <div className="flex justify-between py-2 ">
+                  <div className="flex py-2 w-full justify-between sm:justify-start sm:gap-10">
                     <div className="flex max-[600px]:gap-0 lg:gap-2 gap-1 sm:items-end max-[600px]:items-center">
                       <div className="max-[600px]:scale-75 scale-90 hover:bg-slate-200 rounded-full p-1 cursor-pointer">
                         <svg width="22" height="21.7" fill="grey">
@@ -170,7 +176,7 @@ export const Tweets = ({ tweet }) => {
             </div>
           </div>
         </section> */}
-        
+
       </main>
     </>
   );

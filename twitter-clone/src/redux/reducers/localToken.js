@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const localTokenSlice = createSlice({
   name: 'localToken',
-  //backend yapılınca burası false başlayabilir
   initialState: {
     value: localStorage.getItem("jwtToken")
   },

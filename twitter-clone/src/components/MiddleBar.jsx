@@ -22,7 +22,6 @@ const MiddleBar = () => {
       .catch((err) => console.log(err));
   };
 
-  //backend url sine istek atan herkes sonuçları alabilecek çözüm bul,jwt ekle
   const sendTweet = () => {
     setTextedTweet("")
     axios

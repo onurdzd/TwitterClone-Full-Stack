@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 export const loginStatusSlice = createSlice({
   name: 'loginStatus',
   initialState: {
-  //authentication eklenecek 
     value: localStorage.getItem("jwtToken") ? true : false 
   },
   reducers: {
