@@ -5,8 +5,6 @@ import { logIn } from "../redux/reducers/loginStatus";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setLocalId } from "../redux/reducers/localId";
-import { setLocalToken } from "../redux/reducers/localToken";
 
 export const LoginPage = () => {
   const {
@@ -39,12 +37,10 @@ export const LoginPage = () => {
       )
       .then((response) => {
         if (response.status == 200) {
-          dispatch(logIn());
+          dispatch(logIn(response.data));
           navigate("/");
-          reset();
-          dispatch(setLocalToken(response.data.token))
           loginSuccess();
-          dispatch(setLocalId(response.data.id))
+          reset();
         } else {
           reset();
           loginFailed("Giriş başarısız");
@@ -56,7 +52,6 @@ export const LoginPage = () => {
         reset();
       });
   };
-
   const navigate = useNavigate();
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import LeftBar from "./components/LeftBar";
 import { Messages } from "./components/Messages";
@@ -6,17 +6,56 @@ import MiddleBar from "./components/MiddleBar";
 import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function App() {
+  const [tweets, setTweets] = useState([]);
+  const [textedTweet, setTextedTweet] = useState("");
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
+  const tweetSendToastify=() => toast("Tweet Gönderildi!");
+
+  const gonderButtonRef = useRef(null);
+  const focusGonderButton = () => {
+    if (gonderButtonRef.current) {
+      gonderButtonRef.current.focus();
+    }
+  };
   
   useEffect(() => {
-    if (!loginStatus) {
+    if (!loginStatus.loginStatus) {
       alert("Önce login olmalısın!");
       navigate("/login");
     }
   }, [loginStatus]);
+
+  
+  const getTweets = async () => {
+    await axios
+      .get(`${import.meta.env.VITE_API_URL}tweet`)
+      .then((res) => {
+        setTweets(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const sendTweet = () => {
+    setTextedTweet("")
+    axios
+      .post(`${import.meta.env.VITE_API_URL}tweet`, {
+        userId: loginStatus.localId,
+        tweetText: textedTweet,
+      })
+      .then((response) => {
+        tweetSendToastify()
+        getTweets()
+      }).catch((err)=>console.log(err.response.data.errors))
+  };
+
+  useEffect(() => {
+    getTweets();
+  }, []);
 
   return (
     <>
@@ -24,17 +63,17 @@ function App() {
         <>
           <main className="max-[600px]:hidden container mx-auto w-full">
             <header>
-              <LeftBar></LeftBar>
+              <LeftBar sendTweet={sendTweet} focusGonderButton={focusGonderButton}></LeftBar>
             </header>
             <main className="flex justify-end">
-              <MiddleBar></MiddleBar>
+              <MiddleBar tweets={tweets} sendTweet={sendTweet} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} ></MiddleBar>
               <RightBar></RightBar>
             </main>
             <footer>
               <Messages />
             </footer>
           </main>
-
+      
           <main className="hidden max-[600px]:flex flex-col container mx-auto">
             <header>
               <LeftBar></LeftBar>
