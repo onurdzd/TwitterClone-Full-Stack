@@ -10,9 +10,9 @@ const MiddleBar = (props) => {
   
   return (
     <>
-      <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%] max-w-[650px]">
-        <div className="max-[600px]:px-3 w-full">
-          <div className="flex flex-col w-full h-[100px] border-b-[1px]">
+      <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%] max-w-[600px]">
+        <div className=" w-full">
+          <div className="flex flex-col w-full h-[100px] border-b-[1px] max-[600px]:px-2">
             <section className="hidden max-[600px]:flex items-center gap-2 text-xl justify-between pt-2">
               <div className="flex items-center w-full">
                 <div className="rounded-full">

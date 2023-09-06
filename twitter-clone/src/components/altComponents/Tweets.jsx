@@ -9,7 +9,7 @@ export const Tweets = ({ tweet }) => {
   
   return (
     <>
-      <main className="h-full flex flex-col w-full">
+      <main className="h-full flex flex-col w-full max-[600px]:px-2">
         <section className="border-b-slate-100 border-b-[1px] pt-3 w-full">
           <div className="sm:px-4 px-1 max-[600px]:px-0 w-full">
             <div className="flex w-full pb-2">
@@ -36,8 +36,8 @@ export const Tweets = ({ tweet }) => {
                         locale: tr,
                       }).substring(0, 4)}
                     </div>
-                    <div className="scale-75 w-full flex justify-end">
-                      <svg width="20" height="25" >
+                    <div className="scale-75 w-full flex justify-end cursor-pointer">
+                      <svg width="21" height="25" className="hover:rounded-full hover:bg-slate-200 ">
                         <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
                       </svg>
                     </div>

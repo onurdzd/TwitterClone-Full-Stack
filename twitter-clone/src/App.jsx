@@ -61,7 +61,7 @@ function App() {
     <>
       {loginStatus.loginStatus ? (
         <>
-          <main className=" container mx-auto w-full">
+          <main className="container mx-auto w-full max-w-[1250px] max-lg:max-w-[750px]">
             <header>
               <LeftBar sendTweet={sendTweet} focusGonderButton={focusGonderButton}></LeftBar>
             </header>
