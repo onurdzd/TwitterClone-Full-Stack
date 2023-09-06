@@ -59,9 +59,9 @@ function App() {
 
   return (
     <>
-      {loginStatus ? (
+      {loginStatus.loginStatus ? (
         <>
-          <main className="max-[600px]:hidden container mx-auto w-full">
+          <main className=" container mx-auto w-full">
             <header>
               <LeftBar sendTweet={sendTweet} focusGonderButton={focusGonderButton}></LeftBar>
             </header>
@@ -75,12 +75,6 @@ function App() {
           </main>
       
           <main className="hidden max-[600px]:flex flex-col container mx-auto">
-            <header>
-              <LeftBar></LeftBar>
-            </header>
-            <main className="flex justify-center">
-              <MiddleBar></MiddleBar>
-            </main>
             <footer className="w-full fixed bottom-0 bg-white">
               <nav className="flex gap-5 h-[70%] cursor-pointer border-t-[1px] pt-1">
                 <div className="max-w-fit hover:bg-slate-100 rounded-full flex items-center mx-auto px-4 py-2 ">

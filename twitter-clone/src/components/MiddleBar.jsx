@@ -3,10 +3,11 @@ import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
 
 const MiddleBar = (props) => {
-  const { tweets, sendTweet, textedTweet, setTextedTweet,gonderButtonRef } = props;
+  const { tweets, sendTweet, textedTweet, setTextedTweet, gonderButtonRef } =
+    props;
 
   const [bordered, setBordered] = useState(false);
-
+  
   return (
     <>
       <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%]">
