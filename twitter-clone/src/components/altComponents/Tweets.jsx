@@ -43,7 +43,7 @@ export const Tweets = ({ tweet }) => {
                     </div>
                   </div>
                   <div className="max-h-[568px]">{tweet.tweetText}</div>
-                  <div className="flex  py-2 w-full max-[600px]:justify-start max-[600px]:gap-2 justify-between sm:justify-start sm:gap-10">
+                  <div className="flex  py-2 w-full max-[600px]:justify-start max-[600px]:gap-2 justify-between sm:justify-start sm:gap-5">
                     <div className="flex max-[600px]:gap-0 lg:gap-2 gap-1 sm:items-end max-[600px]:items-center">
                       <div className="max-[600px]:scale-75 scale-90 max-[600px]:p-0 hover:bg-slate-200 rounded-full p-1 cursor-pointer">
                         <svg width="22" height="21.7" fill="grey">
