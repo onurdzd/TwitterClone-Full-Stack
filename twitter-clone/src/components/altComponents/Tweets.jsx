@@ -3,20 +3,38 @@ import mercedes from "./../../assets/mercedes.jpeg";
 import owebp from "./../../assets/O.webp";
 import { formatDistanceToNowStrict } from "date-fns";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
-export const Tweets = ({ tweet,getTweets }) => {
+export const Tweets = ({ tweet, getTweets }) => {
   const inputDateString = tweet.tweetCreatedAt;
   const inputDate = new Date(inputDateString);
   const deleteTweetToastify = () => toast("Tweet silindi!");
+  const [deleteMenuOn, setDeleteMenuOn] = useState(false);
 
-  const deleteTweet=()=>{
-    axios.delete(`${import.meta.env.VITE_API_URL}tweet/${tweet.tweetId}`,{
-      "tweetId":tweet.tweetId
-    }).then(res=>{deleteTweetToastify();getTweets()}).catch(err=>console.log(err))
-  }
-  
+  const deleteTweet = () => {
+    axios
+      .delete(`${import.meta.env.VITE_API_URL}tweet/${tweet.tweetId}`, {
+        tweetId: tweet.tweetId,
+      })
+      .then((res) => {
+        setDeleteMenuOn(false);
+        deleteTweetToastify();
+        getTweets();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      !event.target.closest("#deleteMenu-container") && setDeleteMenuOn(false);
+    }
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [deleteMenuOn]);
+
   return (
     <>
       <main className="h-full flex flex-col w-full max-[600px]:px-2">
@@ -28,7 +46,7 @@ export const Tweets = ({ tweet,getTweets }) => {
               </div>
               <div className="w-full">
                 <div className="flex flex-col pl-2 max-[600px]:pl-0">
-                  <div className="flex items-center w-full">
+                  <div  className="flex items-center w-full">
                     <div className="font-bold flex text-base items-center">
                       Onur
                       <span className="max-[600px]:scale-75 scale-90 max-[600px]:p-0 hover:bg-slate-200 rounded-full p-1 cursor-pointer px-1">
@@ -46,12 +64,28 @@ export const Tweets = ({ tweet,getTweets }) => {
                         locale: tr,
                       }).substring(0, 4)}
                     </div>
-                    <div onClick={deleteTweet} className="scale-75 w-full flex justify-end cursor-pointer">
-                      <div className="hover:bg-slate-100 rounded-full p-1">
-                      <svg width="21" height="25" className="hover:rounded-full ">
-                        <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
-                      </svg>
-                      </div>
+                    <div className="scale-75 w-full flex justify-end">
+                      {!deleteMenuOn ? (
+                        <div 
+                          onClick={() => setDeleteMenuOn(true)}
+                          className="hover:bg-slate-100 rounded-full p-1 cursor-pointer relative z-10"
+                        >
+                          <svg  id="deleteMenu-container"
+                            width="22"
+                            height="25"
+                            className="hover:rounded-full relative z-0"
+                          >
+                            <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
+                          </svg>
+                        </div>
+                      ) : (
+                        <div
+                          className="font-bold text-red-500 rounded-full p-1 hover:bg-slate-200 cursor-pointer"
+                          onClick={deleteTweet}
+                        >
+                          Kaldır
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="max-h-[568px]">{tweet.tweetText}</div>
