@@ -5,17 +5,20 @@ export const userSlice = createSlice({
   initialState: {
     value: {
         "userId":localStorage.getItem("localId"),
-        "username":"",
+        "username":localStorage.getItem("username"),
         "tweets":[]
     }
   },
   reducers: {
     setUserId:(state,action)=>{
       state.value=localStorage.setItem("localId",action.payload)
+    },
+    setUserName:(state,action)=>{
+      state.value=localStorage.setItem("localId",action.payload)
     }
   }
 })
 
-export const { setUserId } = userSlice.actions
+export const { setUserId,setUserName } = userSlice.actions
 
 export default userSlice.reducer

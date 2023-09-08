@@ -56,7 +56,7 @@ export const Tweets = ({ tweet, getTweets }) => {
                       </span>
                     </div>
                     <div className="font-light text-sm max-[600px]:text-xs text-slate-500">
-                      {tweet.userId}
+                      {tweet.tweetUsername}
                     </div>
                     <div className="font-light text-sm max-[600px]:text-xs text-slate-500 ml-3 min-w-[40px]">
                       <span className="mr-1 font-bold">·</span>

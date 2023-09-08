@@ -5,16 +5,14 @@ import { Messages } from "./components/Messages";
 import MiddleBar from "./components/MiddleBar";
 import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 function App() {
   const [tweets, setTweets] = useState([]);
   const [textedTweet, setTextedTweet] = useState("");
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
-  const tweetSendToastify=() => toast("Tweet Gönderildi!");
 
   const gonderButtonRef = useRef(null);
   const focusGonderButton = () => {
@@ -40,19 +38,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const sendTweet = () => {
-    setTextedTweet("")
-    axios
-      .post(`${import.meta.env.VITE_API_URL}tweet`, {
-        userId: loginStatus.localId,
-        tweetText: textedTweet,
-      })
-      .then((response) => {
-        tweetSendToastify()
-        getTweets()
-      }).catch((err)=>console.log(err.response.data.errors))
-  };
-
   useEffect(() => {
     getTweets();
   }, []);
@@ -63,10 +48,10 @@ function App() {
         <>
           <main className="container mx-auto w-full max-w-[1250px] max-lg:max-w-[750px]">
             <header>
-              <LeftBar sendTweet={sendTweet} focusGonderButton={focusGonderButton}></LeftBar>
+              <LeftBar focusGonderButton={focusGonderButton}></LeftBar>
             </header>
             <main className="flex justify-end">
-              <MiddleBar tweets={tweets} getTweets={getTweets} sendTweet={sendTweet} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} ></MiddleBar>
+              <MiddleBar tweets={tweets} getTweets={getTweets} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} ></MiddleBar>
               <RightBar></RightBar>
             </main>
             <footer>

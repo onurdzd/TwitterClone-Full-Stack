@@ -21,6 +21,8 @@ export const loginStatusSlice = createSlice({
       state.value.localToken=localStorage.setItem("jwtToken",action.payload.token);
       state.value.localId=localStorage.getItem("localId");
       state.value.localToken=localStorage.getItem("jwtToken");
+      state.value.localToken=localStorage.setItem("username",action.payload.username);
+      state.value.localToken=localStorage.getItem("username",action.payload.username);
     },
     setLocalId:(state,action)=>{
       state.value.localId=localStorage.setItem("localId",action.payload)

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import owebp from "../assets/O.webp";
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { logOut } from '../redux/reducers/loginStatus'
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ const LeftBar = (props) => {
   const [menuOn, setMenuOn] = useState(false);
   const dispatch = useDispatch()
   const navigate=useNavigate()
+  const username=useSelector(state=>state.userInfo.value.username)
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -160,7 +161,7 @@ const LeftBar = (props) => {
                   </svg>
                 </span>
               </div>
-              <div className="font-light text-sm">@o_tw</div>
+              <div className="font-light text-sm">@{username}</div>
             </div>
             <div className="scale-75 ">
               <svg width="20" height="25">

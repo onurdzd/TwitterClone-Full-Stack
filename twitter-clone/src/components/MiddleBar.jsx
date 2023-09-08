@@ -1,13 +1,32 @@
 import { useState } from "react";
 import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const MiddleBar = (props) => {
-  const { tweets,getTweets, sendTweet, textedTweet, setTextedTweet, gonderButtonRef } =
+  const { tweets, getTweets, textedTweet, setTextedTweet, gonderButtonRef } =
     props;
+  const tweetSendToastify = () => toast("Tweet Gönderildi!");
+  const loginStatus = useSelector((state) => state.loginStatus.value);
 
   const [bordered, setBordered] = useState(false);
-  
+
+  const sendTweet = () => {
+    setTextedTweet("");
+    axios
+      .post(`${import.meta.env.VITE_API_URL}tweet`, {
+        userId: loginStatus.localId,
+        tweetText: textedTweet,
+      })
+      .then((response) => {
+        tweetSendToastify();
+        getTweets();
+      })
+      .catch((err) => console.log(err.response.data.errors));
+  };
+
   return (
     <>
       <section className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%] flex flex-col items-center border-[1px] min-h-[100%] max-w-[600px]">
