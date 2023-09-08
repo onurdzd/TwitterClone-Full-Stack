@@ -66,7 +66,7 @@ function App() {
               <LeftBar sendTweet={sendTweet} focusGonderButton={focusGonderButton}></LeftBar>
             </header>
             <main className="flex justify-end">
-              <MiddleBar tweets={tweets} sendTweet={sendTweet} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} ></MiddleBar>
+              <MiddleBar tweets={tweets} getTweets={getTweets} sendTweet={sendTweet} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} ></MiddleBar>
               <RightBar></RightBar>
             </main>
             <footer>

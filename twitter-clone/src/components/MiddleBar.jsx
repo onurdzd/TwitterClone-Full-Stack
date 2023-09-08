@@ -3,7 +3,7 @@ import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
 
 const MiddleBar = (props) => {
-  const { tweets, sendTweet, textedTweet, setTextedTweet, gonderButtonRef } =
+  const { tweets,getTweets, sendTweet, textedTweet, setTextedTweet, gonderButtonRef } =
     props;
 
   const [bordered, setBordered] = useState(false);
@@ -125,7 +125,7 @@ const MiddleBar = (props) => {
               })
               .map((tweet, index) => (
                 <div key={index}>
-                  <Tweets tweet={tweet}></Tweets>
+                  <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
                 </div>
               ))}
         </div>

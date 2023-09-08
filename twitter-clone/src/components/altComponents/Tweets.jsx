@@ -2,10 +2,20 @@ import { tr } from "date-fns/locale";
 import mercedes from "./../../assets/mercedes.jpeg";
 import owebp from "./../../assets/O.webp";
 import { formatDistanceToNowStrict } from "date-fns";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
-export const Tweets = ({ tweet }) => {
+export const Tweets = ({ tweet,getTweets }) => {
   const inputDateString = tweet.tweetCreatedAt;
   const inputDate = new Date(inputDateString);
+  const deleteTweetToastify = () => toast("Tweet silindi!");
+
+  const deleteTweet=()=>{
+    axios.delete(`${import.meta.env.VITE_API_URL}tweet/${tweet.tweetId}`,{
+      "tweetId":tweet.tweetId
+    }).then(res=>{deleteTweetToastify();getTweets()}).catch(err=>console.log(err))
+  }
   
   return (
     <>
@@ -36,10 +46,12 @@ export const Tweets = ({ tweet }) => {
                         locale: tr,
                       }).substring(0, 4)}
                     </div>
-                    <div className="scale-75 w-full flex justify-end cursor-pointer">
-                      <svg width="21" height="25" className="hover:rounded-full hover:bg-slate-200 ">
+                    <div onClick={deleteTweet} className="scale-75 w-full flex justify-end cursor-pointer">
+                      <div className="hover:bg-slate-100 rounded-full p-1">
+                      <svg width="21" height="25" className="hover:rounded-full ">
                         <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
                       </svg>
+                      </div>
                     </div>
                   </div>
                   <div className="max-h-[568px]">{tweet.tweetText}</div>
