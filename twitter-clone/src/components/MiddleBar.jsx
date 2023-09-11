@@ -139,7 +139,7 @@ const MiddleBar = (props) => {
               </div>
             </div>
           </div>
-          {tweets &&
+          {tweets?.length>0 ?
             [...tweets]
               .sort((a, b) => {
                 return new Date(b.tweetCreatedAt) - new Date(a.tweetCreatedAt);
@@ -148,7 +148,7 @@ const MiddleBar = (props) => {
                 <div key={index}>
                   <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
                 </div>
-              ))}
+              )) : <div className="w-full text-center mt-10">Yükleniyor...</div>}
         </div>
       </section>
     </>
