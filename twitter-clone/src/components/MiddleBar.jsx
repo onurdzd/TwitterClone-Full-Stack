@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
 import axios from "axios";
@@ -20,7 +20,7 @@ const MiddleBar = (props) => {
       .post(`${import.meta.env.VITE_API_URL}tweet`, {
         userId: loginStatus.localId,
         tweetText: textedTweet,
-        tweetUsername:user.username
+        tweetUsername: user.username,
       })
       .then((response) => {
         tweetSendToastify();
@@ -139,7 +139,8 @@ const MiddleBar = (props) => {
               </div>
             </div>
           </div>
-          {tweets?.length>0 ?
+          {
+          tweets?.length>0 ?
             [...tweets]
               .sort((a, b) => {
                 return new Date(b.tweetCreatedAt) - new Date(a.tweetCreatedAt);
@@ -148,7 +149,8 @@ const MiddleBar = (props) => {
                 <div key={index}>
                   <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
                 </div>
-              )) : <div className="w-full text-center mt-10">Yükleniyor...</div>}
+              )) : <div className="w-full text-center mt-10">Yükleniyor...</div>
+          }
         </div>
       </section>
     </>
