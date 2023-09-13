@@ -14,3 +14,8 @@ Login Page :
 
 ![alt text](/twitter-clone/src/assets/twlogin.png)
 
+
+Register Page :
+
+![alt text](/twitter-clone/src/assets/twregister.png)
+

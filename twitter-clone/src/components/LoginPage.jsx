@@ -110,10 +110,10 @@ export const LoginPage = () => {
                 <ErrorMessage errors={errors} name="password" />
               </div>
               <button
-                className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-900"
+                className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-800"
                 type="submit"
               >
-                İlerle
+                Giriş yap
               </button>
               <button className="text-black bg-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
                 Şifremi unuttum

@@ -16,6 +16,7 @@ export const loginStatusSlice = createSlice({
       localStorage.removeItem("localId");
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("username");
+      localStorage.removeItem("name");
     },
     logIn:(state,action)=>{
       state.value.loginStatus=true;
@@ -25,6 +26,8 @@ export const loginStatusSlice = createSlice({
       state.value.localToken=localStorage.getItem("jwtToken");
       localStorage.setItem("username",action.payload.username);
       state.value.username=localStorage.getItem("username");
+      localStorage.setItem("name",action.payload.name);
+      state.value.name=localStorage.getItem("name");
     },
     setLocalId:(state,action)=>{
       state.value.localId=localStorage.setItem("localId",action.payload)
@@ -43,10 +46,16 @@ export const loginStatusSlice = createSlice({
     },
     removeLocalUsername:state=>{
       state.value.localToken=localStorage.removeItem("username")
+    },
+    setLocalName:(state,action)=>{
+      state.value.localToken=localStorage.setItem("name",action.payload)
+    },
+    removeLocalName:state=>{
+      state.value.localToken=localStorage.removeItem("name")
     }
   }
 })
 
-export const { logOut ,logIn,setLocalId,removeLocalId,setLocalToken,removeLocalToken,setLocalUsername,removeLocalUsername} = loginStatusSlice.actions
+export const { logOut ,logIn,setLocalId,removeLocalId,setLocalToken,removeLocalToken,setLocalUsername,removeLocalUsername,setLocalName,removeLocalName} = loginStatusSlice.actions
 
 export default loginStatusSlice.reducer
