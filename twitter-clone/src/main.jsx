@@ -7,6 +7,7 @@ import store from "./redux/store.js";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { RegisterPage } from "./components/RegisterPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,13 @@ const router = createBrowserRouter([
     element: (
       <>
         <LoginPage />
+      </>
+    ),
+  },{
+    path: "/register",
+    element: (
+      <>
+        <RegisterPage />
       </>
     ),
   },

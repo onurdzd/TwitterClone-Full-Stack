@@ -10,17 +10,17 @@ const MiddleBar = (props) => {
     props;
   const tweetSendToastify = () => toast("Tweet Gönderildi!");
   const loginStatus = useSelector((state) => state.loginStatus.value);
-  const user = useSelector((state) => state.userInfo.value);
+  const username=useSelector(item=> item.loginStatus.value.username)
 
   const [bordered, setBordered] = useState(false);
-
+  
   const sendTweet = () => {
     setTextedTweet("");
     axios
       .post(`${import.meta.env.VITE_API_URL}tweet`, {
         userId: loginStatus.localId,
         tweetText: textedTweet,
-        tweetUsername: user.username,
+        tweetUsername: username,
       })
       .then((response) => {
         tweetSendToastify();

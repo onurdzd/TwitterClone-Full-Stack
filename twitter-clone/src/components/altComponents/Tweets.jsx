@@ -5,12 +5,16 @@ import { formatDistanceToNowStrict } from "date-fns";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const Tweets = ({ tweet, getTweets }) => {
   const inputDateString = tweet?.tweetCreatedAt;
   const inputDate = new Date(inputDateString);
   const deleteTweetToastify = () => toast("Tweet silindi!");
+  const deleteTweetErrorToastify = () => toast("Tweet sana ait değil silemezsin!");
   const [deleteMenuOn, setDeleteMenuOn] = useState(false);
+  const username=useSelector(item=> item.loginStatus.value.username)
+
   const [userWithTweets, setUserWithTweets] = useState([]);
   const getUserWithTweets = async () => {
     await axios
@@ -23,16 +27,20 @@ export const Tweets = ({ tweet, getTweets }) => {
   }, []);
 
   const deleteTweet = () => {
+    const params={
+      tweetUsername:username
+    }
     axios
-      .delete(`${import.meta.env.VITE_API_URL}tweet/${tweet.tweetId}`, {
-        tweetId: tweet.tweetId,
-      })
+      .delete(`${import.meta.env.VITE_API_URL}tweet/${tweet.tweetId}`,{params}
+      )
       .then((res) => {
+        if(res.status==200){
         setDeleteMenuOn(false);
         deleteTweetToastify();
         getTweets();
+      }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {err;deleteTweetErrorToastify();});
   };
 
   useEffect(() => {

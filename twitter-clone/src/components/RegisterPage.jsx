@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const {
     register,
     handleSubmit,
@@ -15,9 +15,9 @@ export const LoginPage = () => {
     clearErrors,
   } = useForm({ mode: "onChange" });
 
-  const loginSuccess = () => toast("Giriş başarılı!");
-  const loginFailed = (failedCode) => toast(failedCode);
-  const dispatch=useDispatch();
+  const registerSuccess = () => toast("Kayıt başarılı,giriş yapabilirsin!");
+  const registerFailed = (failedCode) => toast(failedCode);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -25,31 +25,35 @@ export const LoginPage = () => {
 
     axios
       .post(
-        `${import.meta.env.VITE_API_URL}user/login`,
+        `${import.meta.env.VITE_API_URL}user/`,
         {
+          name: data.name.trim(),
           username: data.username.trim(),
           password: data.password.trim(),
-        },{
+          role: "user",
+        },
+        {
           withCredentials: true,
-          headers:{
+          headers: {
             "Content-Type": "application/json",
-          }
+          },
         }
       )
       .then((response) => {
-        if (response.status == 200) {
+        if (response.status == 201) {
           dispatch(logIn(response.data));
-          navigate("/");
-          loginSuccess();
+          navigate("/login");
+          registerSuccess();
           reset();
         } else {
           reset();
-          loginFailed("Giriş başarısız");
+          console.log(response)
+          registerFailed("Kayıt başarısız");
         }
       })
       .catch((error) => {
         console.log(error);
-        loginFailed("Giriş başarısız");
+        registerFailed("Giriş başarısız");
         reset();
       });
   };
@@ -67,16 +71,34 @@ export const LoginPage = () => {
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
               </svg>
             </div>
-            <div className="font-bold text-2xl">Sign in to X</div>
+            <div className="font-bold text-2xl">Register to X</div>
             <form
-              className="flex flex-col gap-5"
+              className="flex flex-col gap-4"
               onSubmit={handleSubmit(onSubmit)}
             >
+              <input
+                placeholder="İsim"
+                className="border-[1px] p-2"
+                {...register("name", {
+                  required: "Bu alan zorunludur.",
+                  maxLength: {
+                    value: 10,
+                    message: "İsim 10 karakterden fazla olamaz.",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "İsim 3 karakterden az olamaz.",
+                  },
+                })}
+              />
+              <div className="text-red-600 font-semibold">
+                <ErrorMessage errors={errors} name="name" />
+              </div>
               <input
                 placeholder="Kullanıcı Adı"
                 className="border-[1px] p-2"
                 {...register("username", {
-                  required: "This is required.",
+                  required: "Bu alan zorunludur.",
                   maxLength: {
                     value: 10,
                     message: "Kullanıcı Adı 10 karakterden fazla olamaz.",
@@ -95,7 +117,7 @@ export const LoginPage = () => {
                 type="password"
                 className="border-[1px] p-2"
                 {...register("password", {
-                  required: "This is required.",
+                  required: "Bu alan zorunludur.",
                   maxLength: {
                     value: 10,
                     message: "Şifre 10 karakterden fazla olamaz.",
@@ -113,14 +135,8 @@ export const LoginPage = () => {
                 className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-900"
                 type="submit"
               >
-                İlerle
-              </button>
-              <button className="text-black bg-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
-                Şifremi unuttum
-              </button>
-              <button onClick={()=>navigate("/register")} className="text-black bg-slate-400 font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
-                Kayıt ol
-              </button>
+                Kaydet
+              </button>  
             </form>
           </div>
         </div>

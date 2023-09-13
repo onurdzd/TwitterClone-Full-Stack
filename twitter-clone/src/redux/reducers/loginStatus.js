@@ -6,23 +6,25 @@ export const loginStatusSlice = createSlice({
     value: {
       "loginStatus": localStorage.getItem("jwtToken") ? true : false,
       "localId": localStorage.getItem("localId"),
-      "localToken":localStorage.getItem("jwtToken")
+      "localToken":localStorage.getItem("jwtToken"),
+      "username":localStorage.getItem("username"),
     }
   },
   reducers: {
     logOut:state=>{
       state.value.loginStatus=false;
-      state.value.localId=localStorage.removeItem("localId");
-      state.value.localToken=localStorage.removeItem("jwtToken");
+      localStorage.removeItem("localId");
+      localStorage.removeItem("jwtToken");
+      localStorage.removeItem("username");
     },
     logIn:(state,action)=>{
       state.value.loginStatus=true;
-      state.value.localId=localStorage.setItem("localId",action.payload.id);
-      state.value.localToken=localStorage.setItem("jwtToken",action.payload.token);
+      localStorage.setItem("localId",action.payload.id);
       state.value.localId=localStorage.getItem("localId");
+      localStorage.setItem("jwtToken",action.payload.token);
       state.value.localToken=localStorage.getItem("jwtToken");
-      state.value.localToken=localStorage.setItem("username",action.payload.username);
-      state.value.localToken=localStorage.getItem("username",action.payload.username);
+      localStorage.setItem("username",action.payload.username);
+      state.value.username=localStorage.getItem("username");
     },
     setLocalId:(state,action)=>{
       state.value.localId=localStorage.setItem("localId",action.payload)
@@ -35,10 +37,16 @@ export const loginStatusSlice = createSlice({
     },
     removeLocalToken:state=>{
       state.value.localToken=localStorage.removeItem("jwtToken")
+    },
+    setLocalUsername:(state,action)=>{
+      state.value.localToken=localStorage.setItem("username",action.payload)
+    },
+    removeLocalUsername:state=>{
+      state.value.localToken=localStorage.removeItem("username")
     }
   }
 })
 
-export const { logOut ,logIn,setLocalId,removeLocalId,setLocalToken,removeLocalToken} = loginStatusSlice.actions
+export const { logOut ,logIn,setLocalId,removeLocalId,setLocalToken,removeLocalToken,setLocalUsername,removeLocalUsername} = loginStatusSlice.actions
 
 export default loginStatusSlice.reducer

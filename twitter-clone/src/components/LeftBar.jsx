@@ -9,8 +9,8 @@ const LeftBar = (props) => {
   const [menuOn, setMenuOn] = useState(false);
   const dispatch = useDispatch()
   const navigate=useNavigate()
-  const username=useSelector(state=>state.userInfo.value.username)
-
+  const username=useSelector(item=> item.loginStatus.value.username)
+  
   useEffect(() => {
     function handleClickOutside(event) {
       !event.target.closest('#menu-container') && setMenuOn(false)
