@@ -76,11 +76,11 @@ export const Tweets = ({ tweet, getTweets }) => {
                     <div className="font-light text-sm max-[600px]:text-xs text-slate-500">
                       {tweet.tweetUsername}
                     </div>
-                    <div className="font-light text-sm max-[600px]:text-xs text-slate-500 ml-3 min-w-[40px]">
+                    <div className="font-light text-sm max-[600px]:text-xs text-slate-500 ml-3 min-w-[50px]">
                       <span className="mr-1 font-bold">·</span>
                       {formatDistanceToNowStrict(inputDate, {
                         locale: tr,
-                      }).substring(0, 4)}
+                      }).substring(0, 5)}
                     </div>
                     <div className="scale-75 w-full flex justify-end">
                       {!deleteMenuOn ? (

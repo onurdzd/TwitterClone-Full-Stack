@@ -5,31 +5,21 @@ import { logOut } from '../redux/reducers/loginStatus'
 import { useNavigate } from "react-router-dom";
 
 const LeftBar = (props) => {
-  const{focusGonderButton}=props
-  const [menuOn, setMenuOn] = useState(false);
+  const{focusGonderButton,profilMenuOn,setprofilMenuOn}=props
   const dispatch = useDispatch()
   const navigate=useNavigate()
   const user=useSelector(item=> item.loginStatus.value)
-  
-  useEffect(() => {
-    function handleClickOutside(event) {
-      !event.target.closest('#menu-container') && setMenuOn(false)
-    }
-    window.addEventListener('click', handleClickOutside);
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    }},[menuOn])  
 
   return (
     <>
-      <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed min-w-[60px]">
-        <nav className="flex flex-col gap-4 h-[70%] cursor-pointer">
-          <div className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125 mx-auto">
+      <section className="max-[600px]:hidden lg:hidden flex flex-col items-center gap-2 h-screen text-xl justify-between fixed min-w-[90px]">
+        <nav className="flex flex-col gap-2 h-[70%] cursor-pointer">
+          <div onClick={()=>navigate("/")} className="max-w-fit hover:bg-slate-100 rounded-full pt-3 p-2 scale-125 mx-auto">
             <svg width="25" height="25">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
             </svg>
           </div>
-          <div className="max-w-fit hover:bg-slate-100 rounded-full flex items-center mx-auto px-4 py-2 font-bold">
+          <div onClick={()=>navigate("/")} className="max-w-fit hover:bg-slate-100 rounded-full flex items-center mx-auto px-4 py-2 font-bold">
             <svg width="25" height="25">
               <path d="M12 1.696L.622 8.807l1.06 1.696L3 9.679V19.5C3 20.881 4.119 22 5.5 22h13c1.381 0 2.5-1.119 2.5-2.5V9.679l1.318.824 1.06-1.696L12 1.696zM12 16.5c-1.933 0-3.5-1.567-3.5-3.5s1.567-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.567 3.5-3.5 3.5z"></path>
             </svg>
@@ -69,20 +59,20 @@ const LeftBar = (props) => {
               <path d="M3.75 12c0-4.56 3.69-8.25 8.25-8.25s8.25 3.69 8.25 8.25-3.69 8.25-8.25 8.25S3.75 16.56 3.75 12zM12 1.75C6.34 1.75 1.75 6.34 1.75 12S6.34 22.25 12 22.25 22.25 17.66 22.25 12 17.66 1.75 12 1.75zm-4.75 11.5c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25S6 11.31 6 12s.56 1.25 1.25 1.25zm9.5 0c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25-1.25.56-1.25 1.25.56 1.25 1.25 1.25zM13.25 12c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25.56-1.25 1.25-1.25 1.25.56 1.25 1.25z"></path>
             </svg>
           </div>
-          <div className="bg-[#1d9bf0] rounded-full w-fit p-2 mt-3 scale-110 hover:bg-blue-500 mx-auto">
+          <div onClick={focusGonderButton} className="bg-[#1d9bf0] rounded-full w-fit p-2 mt-3 scale-110 hover:bg-blue-500 mx-auto">
             <svg width="25" height="25" fill="white">
               <path d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z"></path>
             </svg>
           </div>
         </nav>
-        <div className="pb-8 flex items-center gap-2 scale-110">
-          <div className="rounded-full">
+        <div id="menu-container" onClick={() => setprofilMenuOn(true)} className="pb-8 flex items-center gap-2 scale-110 cursor-pointer">
+          <div className="rounded-full p-1  hover:bg-slate-200">
             <img src={owebp} className="rounded-full"></img>
           </div>
         </div>
       </section>
 
-      <section
+      <section 
         className="hidden lg:w-[25%] max-w-[260px] lg:flex flex-col items-center gap-2 h-screen text-xl justify-between fixed "
       >
         <nav className="flex flex-col gap-2 h-[70%]">
@@ -146,7 +136,7 @@ const LeftBar = (props) => {
         <div
           id="menu-container"
           className="mb-2 flex items-center py-3 px-5 rounded-full gap-2 hover:bg-slate-200 cursor-pointer"
-          onClick={() => setMenuOn(true)}
+          onClick={() => setprofilMenuOn(true)}
         >
           <div className="rounded-full w-[35px] ">
             <img src={owebp} className="rounded-full"></img>
@@ -171,7 +161,7 @@ const LeftBar = (props) => {
           </div>
         </div>
       </section>
-      {menuOn && (
+      {profilMenuOn && (
         <div className="w-[300px] py-3 fixed z-10 bg-white shadow-[15px_25px_90px_10px_rgba(0,0,0,0.2)] bottom-[90px] rounded-2xl">
           <div className="flex flex-col ">
             <div className="border-b-[1px]">

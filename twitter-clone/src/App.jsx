@@ -13,6 +13,8 @@ function App() {
   const [textedTweet, setTextedTweet] = useState("");
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
+  const [profilMenuOn, setprofilMenuOn] = useState(false);
+
 
   const gonderButtonRef = useRef(null);
   const focusGonderButton = () => {
@@ -42,16 +44,25 @@ function App() {
     getTweets();
   }, []);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      !event.target.closest('#menu-container') && setprofilMenuOn(false)
+    }
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    }},[profilMenuOn])  
+
   return (
     <>
       {loginStatus.loginStatus ? (
         <>
           <main className="container mx-auto w-full max-w-[1250px] max-lg:max-w-[750px]">
             <header>
-              <LeftBar focusGonderButton={focusGonderButton}></LeftBar>
+              <LeftBar focusGonderButton={focusGonderButton} profilMenuOn={profilMenuOn} setprofilMenuOn={setprofilMenuOn}></LeftBar>
             </header>
             <main className="flex justify-end">
-              <MiddleBar tweets={tweets} getTweets={getTweets} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} ></MiddleBar>
+              <MiddleBar tweets={tweets} getTweets={getTweets} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} profilMenuOn={profilMenuOn} setprofilMenuOn={setprofilMenuOn}></MiddleBar>
               <RightBar></RightBar>
             </main>
             <footer>

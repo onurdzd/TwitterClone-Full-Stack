@@ -4,14 +4,15 @@ import { Tweets } from "./altComponents/Tweets";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const MiddleBar = (props) => {
-  const { tweets, getTweets, textedTweet, setTextedTweet, gonderButtonRef } =
+  const { tweets, getTweets, textedTweet, setTextedTweet, gonderButtonRef ,profilMenuOn ,setprofilMenuOn} =
     props;
   const tweetSendToastify = () => toast("Tweet Gönderildi!");
   const loginStatus = useSelector((state) => state.loginStatus.value);
   const username=useSelector(item=> item.loginStatus.value.username)
-
+  const navigate=useNavigate()
   const [bordered, setBordered] = useState(false);
   
   const sendTweet = () => {
@@ -35,11 +36,11 @@ const MiddleBar = (props) => {
         <div className=" w-full">
           <div className="flex flex-col w-full h-[100px] border-b-[1px] max-[600px]:px-2">
             <section className="hidden max-[600px]:flex items-center gap-2 text-xl justify-between pt-2">
-              <div className="flex items-center w-full">
-                <div className="rounded-full">
+              <div className="flex items-center w-full ">
+                <div id="menu-container" onClick={() => setprofilMenuOn(true)} className="rounded-full cursor-pointer absolute">
                   <img src={owebp} className="rounded-full"></img>
                 </div>
-                <div className="max-w-fit hover:bg-slate-100 rounded-full  pr-5 scale-125 mx-auto">
+                <div onClick={()=>navigate("/")} className="max-w-fit hover:bg-slate-100 rounded-full p-1 scale-125 mx-auto cursor-pointer">
                   <svg width="25" height="25">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
                   </svg>
