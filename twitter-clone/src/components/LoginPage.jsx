@@ -57,7 +57,7 @@ export const LoginPage = () => {
   return (
     <>
       <div
-        className="flex flex-col justify-center h-full"
+        className="flex flex-col sm:justify-center pb-10 h-full"
         onMouseDown={() => clearErrors()}
       >
         <div className="w-[400px] h-[400px] py-5 mx-auto ">

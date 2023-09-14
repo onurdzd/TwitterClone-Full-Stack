@@ -3,7 +3,7 @@ import owebp from "../assets/O.webp";
 import { useDispatch, useSelector} from 'react-redux'
 import { logOut } from '../redux/reducers/loginStatus'
 import { useNavigate } from "react-router-dom";
-//buraya user.name alınması gerekiyor
+
 const LeftBar = (props) => {
   const{focusGonderButton}=props
   const [menuOn, setMenuOn] = useState(false);

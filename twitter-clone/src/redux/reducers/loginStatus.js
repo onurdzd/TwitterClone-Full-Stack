@@ -8,6 +8,7 @@ export const loginStatusSlice = createSlice({
       "localId": localStorage.getItem("localId"),
       "localToken":localStorage.getItem("jwtToken"),
       "username":localStorage.getItem("username"),
+      "name":localStorage.getItem("name")
     }
   },
   reducers: {
