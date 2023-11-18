@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RegisterPage } from "./components/RegisterPage.jsx";
+import { Profile } from "./components/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,13 @@ const router = createBrowserRouter([
     element: (
       <>
         <RegisterPage />
+      </>
+    ),
+  },{
+    path: "/profile",
+    element: (
+      <>
+        <Profile/>
       </>
     ),
   },

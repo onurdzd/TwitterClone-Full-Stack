@@ -82,7 +82,7 @@ const MiddleBar = (props) => {
           <div className="w-full border-b-[1px] max-[600px]:hidden ">
             <div className="flex px-3">
               <div className="rounded-full min-w-[40px] pt-4">
-                <img src={owebp} className="rounded-full mx-auto "></img>
+                <img onClick={()=>navigate("/profile")} src={owebp} className="rounded-full mx-auto cursor-pointer"></img>
               </div>
               <div className="w-full">
                 <input

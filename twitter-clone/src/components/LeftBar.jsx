@@ -167,7 +167,7 @@ const LeftBar = (props) => {
             <div className="border-b-[1px]">
               <div className="mb-2 flex items-center gap-2 p-3 ">
                 <div className="rounded-full w-[35px]">
-                  <img src={owebp} className="rounded-full"></img>
+                  <img onClick={()=>navigate("/profile")} src={owebp} className="rounded-full cursor-pointer"></img>
                 </div>
                 <div className="flex justify-between w-full items-center">
                   <div>
