@@ -7,14 +7,21 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const MiddleBar = (props) => {
-  const { tweets, getTweets, textedTweet, setTextedTweet, gonderButtonRef ,profilMenuOn ,setprofilMenuOn} =
-    props;
+  const {
+    tweets,
+    getTweets,
+    textedTweet,
+    setTextedTweet,
+    gonderButtonRef,
+    profilMenuOn,
+    setprofilMenuOn,
+  } = props;
   const tweetSendToastify = () => toast("Tweet Gönderildi!");
   const loginStatus = useSelector((state) => state.loginStatus.value);
-  const username=useSelector(item=> item.loginStatus.value.username)
-  const navigate=useNavigate()
+  const username = useSelector((item) => item.loginStatus.value.username);
+  const navigate = useNavigate();
   const [bordered, setBordered] = useState(false);
-  
+
   const sendTweet = () => {
     setTextedTweet("");
     axios
@@ -37,10 +44,17 @@ const MiddleBar = (props) => {
           <div className="flex flex-col w-full h-[100px] border-b-[1px] max-[600px]:px-2">
             <section className="hidden max-[600px]:flex items-center gap-2 text-xl justify-between pt-2">
               <div className="flex items-center w-full ">
-                <div id="menu-container" onClick={() => setprofilMenuOn(true)} className="rounded-full cursor-pointer absolute">
+                <div
+                  id="menu-container"
+                  onClick={() => setprofilMenuOn(true)}
+                  className="rounded-full cursor-pointer absolute"
+                >
                   <img src={owebp} className="rounded-full"></img>
                 </div>
-                <div onClick={()=>navigate("/")} className="max-w-fit hover:bg-slate-100 rounded-full p-1 scale-125 mx-auto cursor-pointer">
+                <div
+                  onClick={() => navigate("/")}
+                  className="max-w-fit hover:bg-slate-100 rounded-full p-1 scale-125 mx-auto cursor-pointer"
+                >
                   <svg width="25" height="25">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
                   </svg>
@@ -82,7 +96,11 @@ const MiddleBar = (props) => {
           <div className="w-full border-b-[1px] max-[600px]:hidden ">
             <div className="flex px-3">
               <div className="rounded-full min-w-[40px] pt-4">
-                <img onClick={()=>navigate("/profile")} src={owebp} className="rounded-full mx-auto cursor-pointer"></img>
+                <img
+                  onClick={() => navigate("/profile")}
+                  src={owebp}
+                  className="rounded-full mx-auto cursor-pointer"
+                ></img>
               </div>
               <div className="w-full">
                 <input
@@ -140,8 +158,7 @@ const MiddleBar = (props) => {
               </div>
             </div>
           </div>
-          {
-          tweets?.length>0 ?
+          {tweets?.length > 0 ? (
             [...tweets]
               .sort((a, b) => {
                 return new Date(b.tweetCreatedAt) - new Date(a.tweetCreatedAt);
@@ -150,8 +167,10 @@ const MiddleBar = (props) => {
                 <div key={index}>
                   <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
                 </div>
-              )) : <div className="w-full text-center mt-10">Yükleniyor...</div>
-          }
+              ))
+          ) : (
+            <div className="w-full text-center mt-10">Yükleniyor...</div>
+          )}
         </div>
       </section>
     </>

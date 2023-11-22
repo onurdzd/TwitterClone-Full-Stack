@@ -2,19 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import "../App.css";
 import LeftBar from "./LeftBar";
 import { Messages } from "./Messages";
-import {Tweets} from "./altComponents/Tweets";
+import { Tweets } from "./altComponents/Tweets";
 import RightBar from "./RightBar";
 import { useNavigate } from "react-router-dom";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
-export const Profile=()=> {
+export const Profile = () => {
   const [tweets, setTweets] = useState([]);
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
-  const user=useSelector(item=> item.loginStatus.value)
+  const user = useSelector((item) => item.loginStatus.value);
   const [profilMenuOn, setprofilMenuOn] = useState(false);
-
+  const [bordered, setBordered] = useState(0);
 
   const gonderButtonRef = useRef(null);
   const focusGonderButton = () => {
@@ -22,19 +22,21 @@ export const Profile=()=> {
       gonderButtonRef.current.focus();
     }
   };
-  
+
   useEffect(() => {
     if (!loginStatus.loginStatus) {
       alert("Önce login olmalısın!");
       navigate("/login");
     }
   }, [loginStatus]);
-  
+
   const getTweets = async () => {
     await axios
       .get(`${import.meta.env.VITE_API_URL}tweet`)
       .then((res) => {
-        const userTweets=res.data?.filter(item=> item.tweetUsername==user.username)
+        const userTweets = res.data?.filter(
+          (item) => item.tweetUsername == user.username
+        );
         setTweets(userTweets);
       })
       .catch((err) => console.log(err));
@@ -46,12 +48,13 @@ export const Profile=()=> {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      !event.target.closest('#menu-container') && setprofilMenuOn(false)
+      !event.target.closest("#menu-container") && setprofilMenuOn(false);
     }
-    window.addEventListener('click', handleClickOutside);
+    window.addEventListener("click", handleClickOutside);
     return () => {
-      window.removeEventListener('click', handleClickOutside);
-    }},[profilMenuOn])  
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [profilMenuOn]);
 
   return (
     <>
@@ -59,29 +62,104 @@ export const Profile=()=> {
         <>
           <main className="container mx-auto w-full max-w-[1250px] max-lg:max-w-[750px]">
             <header>
-              <LeftBar focusGonderButton={focusGonderButton} profilMenuOn={profilMenuOn} setprofilMenuOn={setprofilMenuOn}></LeftBar>
+              <LeftBar
+                focusGonderButton={focusGonderButton}
+                profilMenuOn={profilMenuOn}
+                setprofilMenuOn={setprofilMenuOn}
+              ></LeftBar>
             </header>
-            <main className="flex justify-end">
+            <main className="flex justify-end ">
               <div className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%]">
-              {
-            tweets?.length>0 ?
-            [...tweets]
-              .sort((a, b) => {
-                return new Date(b.tweetCreatedAt) - new Date(a.tweetCreatedAt);
-              })
-              .map((tweet, index) => (
-                <div key={index}>
-                  <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
+                <div className="flex">
+                  <div
+                    onClick={() => setBordered(0)}
+                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                  >
+                    <div
+                      className={`max-[600px]:pb-3 pb-2  ${
+                        bordered == 0 &&
+                        "border-b-[5px] border-b-blue-500 font-bold text-black"
+                      }  max-w-fit`}
+                    >
+                      Gönderiler
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => setBordered(1)}
+                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                  >
+                    <div
+                      className={`pb-2  ${
+                        bordered == 1 &&
+                        "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
+                      }  max-w-fit`}
+                    >
+                      Yanıtlar
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => setBordered(2)}
+                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                  >
+                    <div
+                      className={`pb-2  ${
+                        bordered == 2 &&
+                        "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
+                      }  max-w-fit`}
+                    >
+                      Öne Çıkanlar
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => setBordered(3)}
+                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                  >
+                    <div
+                      className={`pb-2  ${
+                        bordered == 3 &&
+                        "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
+                      }  max-w-fit`}
+                    >
+                      Medya
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => setBordered(4)}
+                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                  >
+                    <div
+                      className={`pb-2  ${
+                        bordered == 4 &&
+                        "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
+                      }  max-w-fit`}
+                    >
+                      Beğeni
+                    </div>
+                  </div>
                 </div>
-              )) : <div className="w-full text-center mt-10">Yükleniyor...</div>
-          }</div>
+                {tweets?.length > 0 ? (
+                  [...tweets]
+                    .sort((a, b) => {
+                      return (
+                        new Date(b.tweetCreatedAt) - new Date(a.tweetCreatedAt)
+                      );
+                    })
+                    .map((tweet, index) => (
+                      <div key={index}>
+                        <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
+                      </div>
+                    ))
+                ) : (
+                  <div className="w-full text-center mt-10">Yükleniyor...</div>
+                )}
+              </div>
               <RightBar></RightBar>
             </main>
             <footer>
               <Messages />
             </footer>
           </main>
-      
+
           <main className="hidden max-[600px]:flex flex-col container mx-auto">
             <footer className="w-full fixed bottom-0 bg-white">
               <nav className="flex gap-5 h-[70%] cursor-pointer border-t-[1px] pt-1">
@@ -121,6 +199,4 @@ export const Profile=()=> {
       )}
     </>
   );
-}
-
-
+};
