@@ -2,15 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import "../App.css";
 import LeftBar from "./LeftBar";
 import { Messages } from "./Messages";
-import MiddleBar from "./MiddleBar";
+import {Tweets} from "./altComponents/Tweets";
 import RightBar from "./RightBar";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import axios from "axios";
 
 export const Profile=()=> {
   const [tweets, setTweets] = useState([]);
-  const [textedTweet, setTextedTweet] = useState("");
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
   const user=useSelector(item=> item.loginStatus.value)
@@ -63,7 +62,19 @@ export const Profile=()=> {
               <LeftBar focusGonderButton={focusGonderButton} profilMenuOn={profilMenuOn} setprofilMenuOn={setprofilMenuOn}></LeftBar>
             </header>
             <main className="flex justify-end">
-              <MiddleBar tweets={tweets} getTweets={getTweets} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} profilMenuOn={profilMenuOn} setprofilMenuOn={setprofilMenuOn}></MiddleBar>
+              <div className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%]">
+              {
+            tweets?.length>0 ?
+            [...tweets]
+              .sort((a, b) => {
+                return new Date(b.tweetCreatedAt) - new Date(a.tweetCreatedAt);
+              })
+              .map((tweet, index) => (
+                <div key={index}>
+                  <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
+                </div>
+              )) : <div className="w-full text-center mt-10">Yükleniyor...</div>
+          }</div>
               <RightBar></RightBar>
             </main>
             <footer>

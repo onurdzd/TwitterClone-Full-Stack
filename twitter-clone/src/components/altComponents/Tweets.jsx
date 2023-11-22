@@ -59,7 +59,7 @@ export const Tweets = ({ tweet, getTweets }) => {
         <section className="border-b-slate-100 border-b-[1px] pt-3 w-full">
           <div className="sm:px-4 px-1 max-[600px]:px-0 w-full">
             <div className="flex w-full pb-2">
-              <div className="rounded-full min-w-[40px] max-[600px]:pt-2">
+              <div className="rounded-full min-w-[40px] pt-2">
                 <img src={owebp} className="rounded-full"></img>
               </div>
               <div className="w-full">
