@@ -70,6 +70,24 @@ export const Profile = () => {
             </header>
             <main className="flex justify-end ">
               <div className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%]">
+                <div className="px-4 py-4 flex items-center cursor-pointer">
+                  <div className="hover:bg-slate-100 rounded-full p-1 ">
+                  <svg width="20" height="25">
+                    <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                  </svg>
+                  </div>
+                  <div className="ml-5">
+                  <div className="font-bold flex text-base items-center">
+                    {user.name}
+                    <span className="scale-90">
+                      <svg width="20" height="25">
+                        <path d="M17.5 7H17v-.25c0-2.76-2.24-5-5-5s-5 2.24-5 5V7h-.5C5.12 7 4 8.12 4 9.5v9C4 19.88 5.12 21 6.5 21h11c1.39 0 2.5-1.12 2.5-2.5v-9C20 8.12 18.89 7 17.5 7zM13 14.73V17h-2v-2.27c-.59-.34-1-.99-1-1.73 0-1.1.9-2 2-2 1.11 0 2 .9 2 2 0 .74-.4 1.39-1 1.73zM15 7H9v-.25c0-1.66 1.35-3 3-3 1.66 0 3 1.34 3 3V7z"></path>
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="font-light text-sm">180 gönderi</div>
+                  </div>
+                </div>
                 <div className="px-4 py-4">
                   <div className="font-bold flex text-base items-center">
                     {user.name}
@@ -86,10 +104,14 @@ export const Profile = () => {
                     </svg>
                     <span className="font-light">Temmuz 2015'de katıldı</span>
                   </div>
-                    <div className="flex">
-                      <div className="font-light"><span className="font-bold">500</span> Takip Edilen</div>
-                      <div className="ml-5 font-light"><span className="font-bold">450</span> Takipçi</div>
+                  <div className="flex">
+                    <div className="font-light">
+                      <span className="font-bold">500</span> Takip Edilen
                     </div>
+                    <div className="ml-5 font-light">
+                      <span className="font-bold">450</span> Takipçi
+                    </div>
+                  </div>
                 </div>
                 <div className="flex">
                   <div
