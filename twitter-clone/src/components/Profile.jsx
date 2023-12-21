@@ -90,12 +90,13 @@ export const Profile = () => {
                     <div className="font-light text-sm">180 gönderi</div>
                   </div>
                   </div>
-                  <div className="w-full px-2">
-                    <div className="flex items-center justify-between">
-                      <div className="rounded-full w-[110px] ">
-                        <img src={owebp} className="rounded-full w-full"></img>
+                  <div className="w-full px-2" >
+                    <div className="min-h-[100px] sm:min-h-[150px] lg:min-h-[200px] bg-slate-400 "></div>
+                    <div className="flex items-center justify-between mx-5" >
+                      <div className="rounded-full w-[110px]" >
+                        <img src={owebp} className="rounded-full w-full" style={{marginTop:-50}} />
                       </div>
-                      <button className="p-2 rounded-full bg-slate-500 hover:bg-slate-200 hover:text-black text-white font-bold">
+                      <button className="p-1 sm:p-2 rounded-full bg-slate-500 hover:bg-slate-200 hover:text-black text-white font-bold">
                         Profili düzenle
                       </button>
                     </div>
