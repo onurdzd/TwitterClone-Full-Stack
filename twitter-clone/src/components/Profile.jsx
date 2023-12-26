@@ -73,7 +73,7 @@ export const Profile = () => {
               <div className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%]">
                 <div className="px-4 py-4 items-center cursor-pointer">
                   <div className="flex mb-2">
-                  <div className="hover:bg-slate-100 rounded-full p-1 ">
+                  <div className="hover:bg-slate-100 rounded-full p-1 " onClick={()=>navigate("/")}>
                     <svg width="20" height="25">
                       <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
                     </svg>
