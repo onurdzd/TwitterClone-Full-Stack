@@ -27,6 +27,7 @@ export const LoginPage = () => {
       data.password.trim() == "test123"
     ) {
       dispatch(logIn(data));
+      localStorage.setItem("name","testUser")
       navigate("/");
       loginSuccess();
     } else {
