@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "tweets": [
+                {
+                    "tweetId": 0,
+                    "tweet": "tweet1",
+                    "username": "adminTest",
+                    "localId":0
+                }
+            ],
+            "users": [
+                {
+                    "localId": 0,
+                    "username": "adminTest",
+                    "password": "test123"
+                }
+            ]
+        }
+    ]
+}

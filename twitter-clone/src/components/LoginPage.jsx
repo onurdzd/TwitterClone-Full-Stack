@@ -17,10 +17,21 @@ export const LoginPage = () => {
 
   const loginSuccess = () => toast("Giriş başarılı!");
   const loginFailed = (failedCode) => toast(failedCode);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
+    //offline dummy data
+    if (
+      data.username.trim() == "adminTest" &&
+      data.password.trim() == "test123"
+    ) {
+      dispatch(logIn(data));
+      navigate("/");
+      loginSuccess();
+    } else {
+
+    //mongodb alive
     axios.defaults.withCredentials = true;
 
     axios
@@ -29,29 +40,30 @@ export const LoginPage = () => {
         {
           username: data.username.trim(),
           password: data.password.trim(),
-        },{
+        },
+        {
           withCredentials: true,
-          headers:{
+          headers: {
             "Content-Type": "application/json",
-          }
+          },
         }
       )
       .then((response) => {
-        if (response.status == 200) {
+       if (response.status == 200) {
           dispatch(logIn(response.data));
           navigate("/");
           loginSuccess();
-          reset();
         } else {
-          reset();
           loginFailed("Giriş başarısız");
         }
+        reset();
       })
       .catch((error) => {
         console.log(error);
         loginFailed("Giriş başarısız");
         reset();
       });
+    }
   };
 
   return (
@@ -118,7 +130,10 @@ export const LoginPage = () => {
               <button className="text-black bg-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
                 Şifremi unuttum
               </button>
-              <button onClick={()=>navigate("/register")} className="text-black bg-slate-400 font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100">
+              <button
+                onClick={() => navigate("/register")}
+                className="text-black bg-slate-400 font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-100"
+              >
                 Kayıt ol
               </button>
             </form>
