@@ -21,51 +21,39 @@ export const LoginPage = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    //offline dummy data
-    if (
-      data.username.trim() == "adminTest" &&
-      data.password.trim() == "test123"
-    ) {
-      dispatch(logIn(data));
-      localStorage.setItem("name","testUser")
-      navigate("/");
-      loginSuccess();
-    } else {
+      //mongodb alive
+      axios.defaults.withCredentials = true;
 
-    //mongodb alive
-    axios.defaults.withCredentials = true;
-
-    axios
-      .post(
-        `${import.meta.env.VITE_API_URL}user/login`,
-        {
-          username: data.username.trim(),
-          password: data.password.trim(),
-        },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
+      axios
+        .post(
+          `${import.meta.env.VITE_API_URL}user/login`,
+          {
+            username: data.username.trim(),
+            password: data.password.trim(),
           },
-        }
-      )
-      .then((response) => {
-       if (response.status == 200) {
-          dispatch(logIn(response.data));
-          navigate("/");
-          loginSuccess();
-        } else {
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          if (response.status == 200) {
+            dispatch(logIn(response.data));
+            navigate("/");
+            loginSuccess();
+          } else {
+            loginFailed("Giriş başarısız");
+          }
+          reset();
+        })
+        .catch((error) => {
+          console.log(error);
           loginFailed("Giriş başarısız");
-        }
-        reset();
-      })
-      .catch((error) => {
-        console.log(error);
-        loginFailed("Giriş başarısız");
-        reset();
-      });
-    }
-  };
+          reset();
+        });
+    };
 
   return (
     <>
@@ -137,7 +125,18 @@ export const LoginPage = () => {
               >
                 Kayıt ol
               </button>
+           
             </form>
+            <button
+                className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-800"
+                onClick={() => {
+                  dispatch(logIn({"id":0,"username":"adminTest","name":"testUser"}));
+                  navigate("/");
+                  loginSuccess();
+                }}
+              >
+                Demo
+              </button>
           </div>
         </div>
       </div>
