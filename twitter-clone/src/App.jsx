@@ -29,7 +29,6 @@ function App() {
     }
   }, [loginStatus]);
 
-  console.log(loginStatus.mockStatus);
   const getTweets = async () => {
     if (loginStatus.mockStatus != "true") {
       await axios

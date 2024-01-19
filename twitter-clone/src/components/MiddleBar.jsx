@@ -40,7 +40,7 @@ const MiddleBar = (props) => {
   }else{
     axios
     .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
-      tweetId:tweets?.length-1,
+      tweetId:tweets?.length+1,
       userId: loginStatus.localId,
       tweetUsername: username,
       tweetText: textedTweet,
@@ -185,7 +185,7 @@ const MiddleBar = (props) => {
                   <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
                 </div>
               ))
-          ) : (localStorage.getItem("username")!="testUser" ?
+          ) : (localStorage.getItem("username")!="errorTrue" ?
           <div className="w-full text-center mt-10">Yükleniyor...</div>:
           <section className="border-b-slate-100 border-b-[1px] pt-3 ">
           <div className="sm:px-4 px-1 max-[600px]:px-0">

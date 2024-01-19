@@ -14,6 +14,7 @@ export const Tweets = ({ tweet, getTweets }) => {
   const deleteTweetErrorToastify = () => toast("Tweet sana ait değil silemezsin!");
   const [deleteMenuOn, setDeleteMenuOn] = useState(false);
   const username=useSelector(item=> item.loginStatus.value.username)
+  const loginStatus = useSelector((state) => state.loginStatus.value);
 
   const [userWithTweets, setUserWithTweets] = useState([]);
   const getUserWithTweets = async () => {
@@ -44,7 +45,7 @@ export const Tweets = ({ tweet, getTweets }) => {
       .catch((err) => {err;deleteTweetErrorToastify();});
   }else{
     axios
-      .delete(`${import.meta.env.VITE_API_MOCK_URL}tweets/${tweet.tweetId}`
+      .delete(`${import.meta.env.VITE_API_MOCK_URL}tweets/${tweet.id}`
       )
       .then((res) => {
         if(res.status==200){
@@ -66,6 +67,7 @@ export const Tweets = ({ tweet, getTweets }) => {
     };
   }, [deleteMenuOn]);
 
+  console.log(tweet)
   return (
     <>
       <main className="h-full flex flex-col w-full max-[600px]:px-2">
@@ -78,7 +80,7 @@ export const Tweets = ({ tweet, getTweets }) => {
               <div className="w-full">
                 <div className="flex flex-col pl-2 max-[600px]:pl-0">
                   <div  className="flex items-center w-full">
-                    <div className="font-bold flex text-base items-center">
+                    <div className="font-bold flex text-base items-center min-w-fit">
                       {tweet.name ? tweet.name : userWithTweets.find(item=>item.username==tweet.tweetUsername)?.name}
                       <span className="max-[600px]:scale-75 scale-90 max-[600px]:p-0 hover:bg-slate-200 rounded-full p-1 cursor-pointer px-1">
                         <svg width="20" height="25" fill="#1d9bf0">

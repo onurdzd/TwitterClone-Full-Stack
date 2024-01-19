@@ -1,7 +1,7 @@
 {
     "tweets": [
         {
-            "tweetId": 0,
+            "id":1,
             "userId": 0,
             "tweetUsername": "testUser",
             "tweetText": "tweet1",
@@ -11,7 +11,7 @@
     ],
     "users": [
         {
-            "userId": 0,
+            "id":1,
             "username": "testUser",
             "password": "test123",
             "role": "user",
