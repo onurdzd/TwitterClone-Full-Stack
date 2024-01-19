@@ -130,7 +130,7 @@ export const LoginPage = () => {
             <button
                 className="cursor-pointer bg-black text-white font-bold border-[2px] rounded-full px-10 py-1 w-[250px] hover:bg-slate-800"
                 onClick={() => {
-                  dispatch(logIn({"id":0,"username":"adminTest","name":"testUser"}));
+                  dispatch(logIn({"id":0,"username":"testUser","name":"testUser","mockStatus":true}));
                   navigate("/");
                   loginSuccess();
                 }}

@@ -8,7 +8,8 @@ export const loginStatusSlice = createSlice({
       "localId": localStorage.getItem("localId"),
       "localToken":localStorage.getItem("jwtToken"),
       "username":localStorage.getItem("username"),
-      "name":localStorage.getItem("name")
+      "name":localStorage.getItem("name"),
+      "mockStatus":localStorage.getItem("mockStatus")
     }
   },
   reducers: {
@@ -18,6 +19,7 @@ export const loginStatusSlice = createSlice({
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("username");
       localStorage.removeItem("name");
+      localStorage.removeItem("mockStatus");
     },
     logIn:(state,action)=>{
       state.value.loginStatus=true;
@@ -29,6 +31,8 @@ export const loginStatusSlice = createSlice({
       state.value.username=localStorage.getItem("username");
       localStorage.setItem("name",action.payload.name);
       state.value.name=localStorage.getItem("name");
+      localStorage.setItem("mockStatus",action.payload.mockStatus);
+      state.value.name=localStorage.getItem("mockStatus");
     },
     setLocalId:(state,action)=>{
       state.value.localId=localStorage.setItem("localId",action.payload)
@@ -43,20 +47,26 @@ export const loginStatusSlice = createSlice({
       state.value.localToken=localStorage.removeItem("jwtToken")
     },
     setLocalUsername:(state,action)=>{
-      state.value.localToken=localStorage.setItem("username",action.payload)
+      state.value.username=localStorage.setItem("username",action.payload)
     },
     removeLocalUsername:state=>{
-      state.value.localToken=localStorage.removeItem("username")
+      state.value.username=localStorage.removeItem("username")
     },
     setLocalName:(state,action)=>{
-      state.value.localToken=localStorage.setItem("name",action.payload)
+      state.value.name=localStorage.setItem("name",action.payload)
     },
     removeLocalName:state=>{
-      state.value.localToken=localStorage.removeItem("name")
+      state.value.name=localStorage.removeItem("name")
+    },
+    setMockStatus:(state,action)=>{
+      state.value.mockStatus=localStorage.setItem("mockStatus",action.payload)
+    },
+    removeMockStatus:state=>{
+      state.value.mockStatus=localStorage.removeItem("mockStatus")
     }
   }
 })
 
-export const { logOut ,logIn,setLocalId,removeLocalId,setLocalToken,removeLocalToken,setLocalUsername,removeLocalUsername,setLocalName,removeLocalName} = loginStatusSlice.actions
+export const { logOut ,logIn,setLocalId,removeLocalId,setLocalToken,removeLocalToken,setLocalUsername,removeLocalUsername,setLocalName,removeLocalName,setMockStatus,removeMockStatus} = loginStatusSlice.actions
 
 export default loginStatusSlice.reducer
