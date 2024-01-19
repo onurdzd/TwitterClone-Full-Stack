@@ -169,7 +169,7 @@ const MiddleBar = (props) => {
                   <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
                 </div>
               ))
-          ) : (localStorage.getItem("username")!="adminTest" ?
+          ) : (localStorage.getItem("username")!="testUser" ?
           <div className="w-full text-center mt-10">Yükleniyor...</div>:
           <section className="border-b-slate-100 border-b-[1px] pt-3 ">
           <div className="sm:px-4 px-1 max-[600px]:px-0">

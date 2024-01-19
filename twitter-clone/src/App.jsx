@@ -13,6 +13,7 @@ function App() {
   const [textedTweet, setTextedTweet] = useState("");
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
+  const mockStatus = useSelector((state) => state.mockStatus.value);
   const [profilMenuOn, setprofilMenuOn] = useState(false);
 
 
@@ -32,13 +33,25 @@ function App() {
 
   
   const getTweets = async () => {
+    if(mockStatus!=true){
     await axios
       .get(`${import.meta.env.VITE_API_URL}tweet`)
       .then((res) => {
         setTweets(res.data);
       })
       .catch((err) => console.log(err));
+    }else{
+      await axios
+      .get(`${import.meta.env.VITE_API_MOCK_URL}tweets`)
+      .then((res) => {
+        setTweets(res.data);
+      })
+      .catch((err) => console.log(err));
+    }
   };
+
+
+  //https://my-json-server.typicode.com/onurdzd/mockData/posts
 
   useEffect(() => {
     getTweets();
