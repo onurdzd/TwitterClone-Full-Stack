@@ -25,6 +25,7 @@ const MiddleBar = (props) => {
 
   const sendTweet = () => {
     setTextedTweet("");
+    if (loginStatus.mockStatus != "true") {
     axios
       .post(`${import.meta.env.VITE_API_URL}tweet`, {
         userId: loginStatus.localId,
@@ -36,7 +37,22 @@ const MiddleBar = (props) => {
         getTweets();
       })
       .catch((err) => console.log(err.response.data.errors));
-  };
+  }else{
+    axios
+    .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
+      tweetId:tweets?.length-1,
+      userId: loginStatus.localId,
+      tweetUsername: username,
+      tweetText: textedTweet,
+      tweetCreatedAt:Date.now(),
+      name:localStorage.getItem("name"),
+    })
+    .then((response) => {
+      tweetSendToastify();
+      getTweets();
+    })
+    .catch((err) => console.log(err.response.data.errors));
+  }}
 
   return (
     <>

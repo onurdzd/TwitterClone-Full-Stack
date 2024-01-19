@@ -13,9 +13,7 @@ function App() {
   const [textedTweet, setTextedTweet] = useState("");
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.loginStatus.value);
-  const mockStatus = useSelector((state) => state.mockStatus.value);
   const [profilMenuOn, setprofilMenuOn] = useState(false);
-
 
   const gonderButtonRef = useRef(null);
   const focusGonderButton = () => {
@@ -23,7 +21,7 @@ function App() {
       gonderButtonRef.current.focus();
     }
   };
-  
+
   useEffect(() => {
     if (!loginStatus.loginStatus) {
       alert("Önce login olmalısın!");
@@ -31,27 +29,24 @@ function App() {
     }
   }, [loginStatus]);
 
-  
+  console.log(loginStatus.mockStatus);
   const getTweets = async () => {
-    if(mockStatus!=true){
-    await axios
-      .get(`${import.meta.env.VITE_API_URL}tweet`)
-      .then((res) => {
-        setTweets(res.data);
-      })
-      .catch((err) => console.log(err));
-    }else{
+    if (loginStatus.mockStatus != "true") {
       await axios
-      .get(`${import.meta.env.VITE_API_MOCK_URL}tweets`)
-      .then((res) => {
-        setTweets(res.data);
-      })
-      .catch((err) => console.log(err));
+        .get(`${import.meta.env.VITE_API_URL}tweet`)
+        .then((res) => {
+          setTweets(res.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      await axios
+        .get(`${import.meta.env.VITE_API_MOCK_URL}tweets`)
+        .then((res) => {
+          setTweets(res.data);
+        })
+        .catch((err) => console.log(err));
     }
   };
-
-
-  //https://my-json-server.typicode.com/onurdzd/mockData/posts
 
   useEffect(() => {
     getTweets();
@@ -59,12 +54,13 @@ function App() {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      !event.target.closest('#menu-container') && setprofilMenuOn(false)
+      !event.target.closest("#menu-container") && setprofilMenuOn(false);
     }
-    window.addEventListener('click', handleClickOutside);
+    window.addEventListener("click", handleClickOutside);
     return () => {
-      window.removeEventListener('click', handleClickOutside);
-    }},[profilMenuOn])  
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [profilMenuOn]);
 
   return (
     <>
@@ -72,17 +68,29 @@ function App() {
         <>
           <main className="container mx-auto w-full max-w-[1250px] max-lg:max-w-[750px]">
             <header>
-              <LeftBar focusGonderButton={focusGonderButton} profilMenuOn={profilMenuOn} setprofilMenuOn={setprofilMenuOn}></LeftBar>
+              <LeftBar
+                focusGonderButton={focusGonderButton}
+                profilMenuOn={profilMenuOn}
+                setprofilMenuOn={setprofilMenuOn}
+              ></LeftBar>
             </header>
             <main className="flex justify-end">
-              <MiddleBar tweets={tweets} getTweets={getTweets} textedTweet={textedTweet} setTextedTweet={setTextedTweet} gonderButtonRef={gonderButtonRef} profilMenuOn={profilMenuOn} setprofilMenuOn={setprofilMenuOn}></MiddleBar>
+              <MiddleBar
+                tweets={tweets}
+                getTweets={getTweets}
+                textedTweet={textedTweet}
+                setTextedTweet={setTextedTweet}
+                gonderButtonRef={gonderButtonRef}
+                profilMenuOn={profilMenuOn}
+                setprofilMenuOn={setprofilMenuOn}
+              ></MiddleBar>
               <RightBar></RightBar>
             </main>
             <footer>
               <Messages />
             </footer>
           </main>
-      
+
           <main className="hidden max-[600px]:flex flex-col container mx-auto">
             <footer className="w-full fixed bottom-0 bg-white">
               <nav className="flex gap-5 h-[70%] cursor-pointer border-t-[1px] pt-1">

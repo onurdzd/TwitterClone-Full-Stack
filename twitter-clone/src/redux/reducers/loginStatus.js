@@ -9,7 +9,7 @@ export const loginStatusSlice = createSlice({
       "localToken":localStorage.getItem("jwtToken"),
       "username":localStorage.getItem("username"),
       "name":localStorage.getItem("name"),
-      "mockStatus":localStorage.getItem("mockStatus")
+      "mockStatus": localStorage.getItem("mockStatus") ? localStorage.getItem("mockStatus") : false,
     }
   },
   reducers: {
@@ -32,7 +32,7 @@ export const loginStatusSlice = createSlice({
       localStorage.setItem("name",action.payload.name);
       state.value.name=localStorage.getItem("name");
       localStorage.setItem("mockStatus",action.payload.mockStatus);
-      state.value.name=localStorage.getItem("mockStatus");
+      state.value.mockStatus=localStorage.getItem("mockStatus");
     },
     setLocalId:(state,action)=>{
       state.value.localId=localStorage.setItem("localId",action.payload)

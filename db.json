@@ -6,7 +6,7 @@
             "tweetUsername": "testUser",
             "tweetText": "tweet1",
             "tweetCreatedAt": 0,
-            "mockStatus": true
+            "name":"Test User"
         }
     ],
     "users": [
@@ -15,7 +15,7 @@
             "username": "testUser",
             "password": "test123",
             "role": "user",
-            "userCreatedAt": "2023-09-04T07:50:35.210+00:00",
+            "userCreatedAt": "01-01-2024",
             "name": "Test User"
         }
     ]
