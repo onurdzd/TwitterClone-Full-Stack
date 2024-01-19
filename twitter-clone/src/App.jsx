@@ -77,6 +77,7 @@ function App() {
               <MiddleBar
                 tweets={tweets}
                 getTweets={getTweets}
+                setTweets={setTweets}
                 textedTweet={textedTweet}
                 setTextedTweet={setTextedTweet}
                 gonderButtonRef={gonderButtonRef}

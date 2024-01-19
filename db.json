@@ -5,7 +5,23 @@
             "userId": 0,
             "tweetUsername": "testUser",
             "tweetText": "tweet1",
-            "tweetCreatedAt": 0,
+            "tweetCreatedAt": "2023-09-12T10:17:52.838+00:00",
+            "name":"Test User"
+        },
+        {
+            "id":2,
+            "userId": 0,
+            "tweetUsername": "testUser",
+            "tweetText": "tweet2",
+            "tweetCreatedAt": "2023-09-12T10:21:52.838+00:00",
+            "name":"Test User"
+        },
+        {
+            "id":3,
+            "userId": 0,
+            "tweetUsername": "testUser",
+            "tweetText": "tweet3",
+            "tweetCreatedAt": "2023-09-12T10:33:52.838+00:00",
             "name":"Test User"
         }
     ],
@@ -15,7 +31,7 @@
             "username": "testUser",
             "password": "test123",
             "role": "user",
-            "userCreatedAt": "01-01-2024",
+            "userCreatedAt": "2023-09-12T10:17:52.838+00:00",
             "name": "Test User"
         }
     ]

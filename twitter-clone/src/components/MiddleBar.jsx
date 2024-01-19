@@ -11,6 +11,7 @@ const MiddleBar = (props) => {
   const {
     tweets,
     getTweets,
+    setTweets,
     textedTweet,
     setTextedTweet,
     gonderButtonRef,
@@ -40,7 +41,7 @@ const MiddleBar = (props) => {
   }else{
     axios
     .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
-      tweetId:tweets?.length+1,
+      id:tweets.length+1,
       userId: loginStatus.localId,
       tweetUsername: username,
       tweetText: textedTweet,
@@ -49,7 +50,7 @@ const MiddleBar = (props) => {
     })
     .then((response) => {
       tweetSendToastify();
-      getTweets();
+      setTweets([...tweets, response.data])
     })
     .catch((err) => console.log(err.response.data.errors));
   }}
@@ -182,7 +183,7 @@ const MiddleBar = (props) => {
               })
               .map((tweet, index) => (
                 <div key={index}>
-                  <Tweets tweet={tweet} getTweets={getTweets}></Tweets>
+                  <Tweets tweet={tweet} tweets={tweets} getTweets={getTweets} setTweets={setTweets}></Tweets>
                 </div>
               ))
           ) : (localStorage.getItem("username")!="errorTrue" ?
