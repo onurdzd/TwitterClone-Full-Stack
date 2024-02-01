@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RegisterPage } from "./components/RegisterPage.jsx";
 import { Profile } from "./components/Profile.jsx";
+import SendTweetMobile from "./components/altComponents/SendTweetMobile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
     element: (
       <>
         <Profile/>
+      </>
+    ),
+  },
+  {
+    path: "/sendtweetmobile",
+    element: (
+      <>
+        <SendTweetMobile/>
       </>
     ),
   },

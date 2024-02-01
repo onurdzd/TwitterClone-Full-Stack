@@ -71,30 +71,37 @@ export const Profile = () => {
             </header>
             <main className="flex justify-end ">
               <div className="max-[600px]:w-full lg:w-[45%] max-[1025px]:w-[85%]">
-                <div className="px-4 py-4 items-center cursor-pointer">
+                <div className="sm:px-4 sm:py-4 py-1 items-center cursor-pointer">
                   <div className="flex mb-2">
-                  <div className="hover:bg-slate-100 rounded-full p-1 " onClick={()=>navigate("/")}>
-                    <svg width="20" height="25">
-                      <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
-                    </svg>
-                  </div>
-                  <div className="ml-5">
-                    <div className="font-bold flex text-base items-center">
-                      {user.name}
-                      <span className="scale-90">
-                        <svg width="20" height="25">
-                          <path d="M17.5 7H17v-.25c0-2.76-2.24-5-5-5s-5 2.24-5 5V7h-.5C5.12 7 4 8.12 4 9.5v9C4 19.88 5.12 21 6.5 21h11c1.39 0 2.5-1.12 2.5-2.5v-9C20 8.12 18.89 7 17.5 7zM13 14.73V17h-2v-2.27c-.59-.34-1-.99-1-1.73 0-1.1.9-2 2-2 1.11 0 2 .9 2 2 0 .74-.4 1.39-1 1.73zM15 7H9v-.25c0-1.66 1.35-3 3-3 1.66 0 3 1.34 3 3V7z"></path>
-                        </svg>
-                      </span>
+                    <div
+                      className="hover:bg-slate-100 rounded-full p-1 "
+                      onClick={() => navigate("/")}
+                    >
+                      <svg width="20" height="25">
+                        <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                      </svg>
                     </div>
-                    <div className="font-light text-sm">180 gönderi</div>
+                    <div className="ml-5">
+                      <div className="font-bold flex text-base items-center">
+                        {user.name}
+                        <span className="scale-90">
+                          <svg width="20" height="25">
+                            <path d="M17.5 7H17v-.25c0-2.76-2.24-5-5-5s-5 2.24-5 5V7h-.5C5.12 7 4 8.12 4 9.5v9C4 19.88 5.12 21 6.5 21h11c1.39 0 2.5-1.12 2.5-2.5v-9C20 8.12 18.89 7 17.5 7zM13 14.73V17h-2v-2.27c-.59-.34-1-.99-1-1.73 0-1.1.9-2 2-2 1.11 0 2 .9 2 2 0 .74-.4 1.39-1 1.73zM15 7H9v-.25c0-1.66 1.35-3 3-3 1.66 0 3 1.34 3 3V7z"></path>
+                          </svg>
+                        </span>
+                      </div>
+                      <div className="font-light text-sm">180 gönderi</div>
+                    </div>
                   </div>
-                  </div>
-                  <div className="w-full px-2" >
+                  <div className="w-full sm:px-2">
                     <div className="min-h-[100px] sm:min-h-[150px] lg:min-h-[200px] bg-slate-400 "></div>
-                    <div className="flex items-center justify-between mx-5" >
-                      <div className="rounded-full w-[110px]" >
-                        <img src={owebp} className="rounded-full w-full" style={{marginTop:-50}} />
+                    <div className="flex items-center justify-between mx-5">
+                      <div className="rounded-full w-[110px]">
+                        <img
+                          src={owebp}
+                          className="rounded-full w-full"
+                          style={{ marginTop: -50 }}
+                        />
                       </div>
                       <button className="p-1 sm:p-2 rounded-full bg-slate-500 hover:bg-slate-200 hover:text-black text-white font-bold">
                         Profili düzenle
@@ -102,7 +109,7 @@ export const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="px-4 py-4">
+                <div className="sm:px-4 sm:py-4 p-2">
                   <div className="font-bold flex text-base items-center">
                     {user.name}
                     <span className="scale-90">
@@ -127,13 +134,13 @@ export const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex">
+                <div className="flex overflow-x-auto min-w-[400px] pt-3">
                   <div
                     onClick={() => setBordered(0)}
-                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                    className="cursor-pointer w-full flex justify-center sm:text-l text-sm text-slate-400"
                   >
                     <div
-                      className={`max-[600px]:pb-3 pb-2  ${
+                      className={`max-[600px]:pb-3 sm:pb-2  ${
                         bordered == 0 &&
                         "border-b-[5px] border-b-blue-500 font-bold text-black"
                       }  max-w-fit`}
@@ -143,10 +150,10 @@ export const Profile = () => {
                   </div>
                   <div
                     onClick={() => setBordered(1)}
-                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                    className="cursor-pointer w-full flex justify-center sm:text-medium text-sm text-slate-400"
                   >
                     <div
-                      className={`pb-2  ${
+                      className={`sm:pb-2  ${
                         bordered == 1 &&
                         "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
                       }  max-w-fit`}
@@ -156,10 +163,10 @@ export const Profile = () => {
                   </div>
                   <div
                     onClick={() => setBordered(2)}
-                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                    className="cursor-pointer w-full flex justify-center sm:text-medium text-sm text-slate-400"
                   >
                     <div
-                      className={`pb-2  ${
+                      className={`sm:pb-2  ${
                         bordered == 2 &&
                         "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
                       }  max-w-fit`}
@@ -169,10 +176,10 @@ export const Profile = () => {
                   </div>
                   <div
                     onClick={() => setBordered(3)}
-                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                    className="cursor-pointer w-full flex justify-center sm:text-medium text-sm text-slate-400"
                   >
                     <div
-                      className={`pb-2  ${
+                      className={`sm:pb-2  ${
                         bordered == 3 &&
                         "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
                       }  max-w-fit`}
@@ -182,10 +189,10 @@ export const Profile = () => {
                   </div>
                   <div
                     onClick={() => setBordered(4)}
-                    className="cursor-pointer w-full flex justify-center font-medium text-slate-400"
+                    className="cursor-pointer w-full flex justify-center sm:text-medium text-sm text-slate-400"
                   >
                     <div
-                      className={`pb-2  ${
+                      className={`sm:pb-2  ${
                         bordered == 4 &&
                         "max-[600px]:pb-3 border-b-[5px] border-b-blue-500 font-bold text-black"
                       }  max-w-fit`}
@@ -242,7 +249,10 @@ export const Profile = () => {
                 </div>
               </nav>
             </footer>
-            <div className="fixed right-10 bottom-14 bg-[#1d9bf0] cursor-pointer rounded-full w-fit p-2 mt-3 scale-110 hover:bg-blue-500 mx-auto">
+            <div
+              onClick={() => navigate("/sendtweetmobile")}
+              className="fixed right-10 bottom-14 bg-[#1d9bf0] cursor-pointer rounded-full w-fit p-2 mt-3 scale-110 hover:bg-blue-500 mx-auto"
+            >
               <svg width="25" height="25" fill="white">
                 <path d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z"></path>
               </svg>

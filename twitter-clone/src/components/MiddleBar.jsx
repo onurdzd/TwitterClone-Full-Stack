@@ -41,7 +41,7 @@ const MiddleBar = (props) => {
   }else{
     axios
     .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
-      id:tweets.length+1,
+      id:tweets.length==2 ? 4 :tweets.length==1 ? 5 : tweets.length==0 ? 6 : tweets.length+1,
       userId: loginStatus.localId,
       tweetUsername: username,
       tweetText: textedTweet,
