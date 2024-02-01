@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import owebp from "../assets/O.webp";
 import { Tweets } from "./altComponents/Tweets";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 import mercedes from "../assets/mercedes.jpeg";
 
@@ -15,45 +13,13 @@ const MiddleBar = (props) => {
     textedTweet,
     setTextedTweet,
     gonderButtonRef,
-    profilMenuOn,
     setprofilMenuOn,
+    sendTweet
   } = props;
-  const tweetSendToastify = () => toast("Tweet Gönderildi!");
-  const loginStatus = useSelector((state) => state.loginStatus.value);
-  const username = useSelector((item) => item.loginStatus.value.username);
+
   const navigate = useNavigate();
   const [bordered, setBordered] = useState(false);
 
-  const sendTweet = () => {
-    setTextedTweet("");
-    if (loginStatus.mockStatus != "true") {
-    axios
-      .post(`${import.meta.env.VITE_API_URL}tweet`, {
-        userId: loginStatus.localId,
-        tweetText: textedTweet,
-        tweetUsername: username,
-      })
-      .then((response) => {
-        tweetSendToastify();
-        getTweets();
-      })
-      .catch((err) => console.log(err.response.data.errors));
-  }else{
-    axios
-    .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
-      id:tweets.length==2 ? 4 :tweets.length==1 ? 5 : tweets.length==0 ? 6 : tweets.length+1,
-      userId: loginStatus.localId,
-      tweetUsername: username,
-      tweetText: textedTweet,
-      tweetCreatedAt:Date.now(),
-      name:localStorage.getItem("name"),
-    })
-    .then((response) => {
-      tweetSendToastify();
-      setTweets([...tweets, response.data])
-    })
-    .catch((err) => console.log(err.response.data.errors));
-  }}
 
   return (
     <>

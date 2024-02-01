@@ -7,6 +7,7 @@ import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function App() {
   const [tweets, setTweets] = useState([]);
@@ -21,6 +22,10 @@ function App() {
       gonderButtonRef.current.focus();
     }
   };
+
+  const tweetSendToastify = () => toast("Tweet Gönderildi!");
+  const username = useSelector((item) => item.loginStatus.value.username);
+  const dispatch=useDispatch()
 
   useEffect(() => {
     if (!loginStatus.loginStatus) {
@@ -46,6 +51,37 @@ function App() {
         .catch((err) => console.log(err));
     }
   };
+  
+  const sendTweet = () => {
+    setTextedTweet("");
+    if (loginStatus.mockStatus != "true") {
+    axios
+      .post(`${import.meta.env.VITE_API_URL}tweet`, {
+        userId: loginStatus.localId,
+        tweetText: textedTweet,
+        tweetUsername: username,
+      })
+      .then((response) => {
+        tweetSendToastify();
+        getTweets();
+      })
+      .catch((err) => console.log(err.response.data.errors));
+  }else{
+    axios
+    .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
+      id:tweets.length==2 ? 4 :tweets.length==1 ? 5 : tweets.length==0 ? 6 : tweets.length+1,
+      userId: loginStatus.localId,
+      tweetUsername: username,
+      tweetText: textedTweet,
+      tweetCreatedAt:Date.now(),
+      name:localStorage.getItem("name"),
+    })
+    .then((response) => {
+      tweetSendToastify();
+      setTweets([...tweets, response.data])
+    })
+    .catch((err) => console.log(err.response.data.errors));
+  }}
 
   useEffect(() => {
     getTweets();
@@ -83,6 +119,7 @@ function App() {
                 gonderButtonRef={gonderButtonRef}
                 profilMenuOn={profilMenuOn}
                 setprofilMenuOn={setprofilMenuOn}
+                sendTweet={sendTweet}
               ></MiddleBar>
               <RightBar></RightBar>
             </main>

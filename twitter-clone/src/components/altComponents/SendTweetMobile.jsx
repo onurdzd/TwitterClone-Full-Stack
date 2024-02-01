@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import owebp from "./../../assets/O.webp";
 
-const SendTweetMobile = () => {
+const SendTweetMobile = (props) => {
   const navigate = useNavigate();
+
+  const {
+    textedTweet,
+    sendTweet
+  } = props;
 
   return (
     <>
@@ -23,7 +28,8 @@ const SendTweetMobile = () => {
               </button>
             </div>
             <div className="pr-2 text-sm">
-              <button className="bg-[#1d9bf0] rounded-full px-3 py-2 lg:min-w-[50px] text-white font-semibold disabled:bg-blue-300">
+              <button   disabled={textedTweet == ""}
+                      onClick={sendTweet} className="bg-[#1d9bf0] rounded-full px-3 py-2 lg:min-w-[50px] text-white font-semibold disabled:bg-blue-300">
                 Gönder
               </button>
             </div>
