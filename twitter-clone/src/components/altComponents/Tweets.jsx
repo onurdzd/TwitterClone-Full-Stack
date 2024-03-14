@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export const Tweets = ({ tweet, getTweets, setTweets,tweets }) => {
+export const Tweets = ({ tweet, handleGetTweet, setTweets,tweets }) => {
   const inputDateString = tweet?.tweetCreatedAt;
   const inputDate = new Date(inputDateString);
   const deleteTweetToastify = () => toast("Tweet silindi!");
@@ -41,7 +41,7 @@ export const Tweets = ({ tweet, getTweets, setTweets,tweets }) => {
           if (res.status == 200) {
             setDeleteMenuOn(false);
             deleteTweetToastify();
-            getTweets();
+            handleGetTweet();
           }
         })
         .catch((err) => {

@@ -1,13 +1,34 @@
 import { useNavigate } from "react-router-dom";
 import owebp from "./../../assets/O.webp";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { sendTweet ,fetchTweets} from "../../redux/reducers/tweetSlice";
 
-const SendTweetMobile = (props) => {
+//tweets ve setTweets buraya alınmadan çalışamıyor.
+
+const SendTweetMobile = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const {
-    textedTweet,
-    sendTweet
-  } = props;
+  const [textedTweet, setTextedTweet] = useState("");
+
+  const username = useSelector((item) => item.loginStatus.value.username);
+  const loginStatus = useSelector((state) => state.loginStatus.value);
+
+  let tweetsLength=tweets.length
+
+  const handleSendTweet = async() => {
+    setTextedTweet(""); // Gönderildikten sonra input'u temizle veya başka bir işlem yapabilirsiniz
+    const result = await dispatch(sendTweet({ textedTweet, username, loginStatus, handleGetTweet,tweetsLength }));
+    if (loginStatus.mockStatus == "true"){
+      setTweets([...tweets, result.payload])
+    }
+  };
+
+  const handleGetTweet = async () => {
+    const result = await dispatch(fetchTweets({ loginStatus }));
+    setTweets(result.payload);
+  };
 
   return (
     <>
@@ -29,7 +50,7 @@ const SendTweetMobile = (props) => {
             </div>
             <div className="pr-2 text-sm">
               <button   disabled={textedTweet == ""}
-                      onClick={sendTweet} className="bg-[#1d9bf0] rounded-full px-3 py-2 lg:min-w-[50px] text-white font-semibold disabled:bg-blue-300">
+                      onClick={()=>{handleSendTweet();navigate("/")}} className="bg-[#1d9bf0] rounded-full px-3 py-2 lg:min-w-[50px] text-white font-semibold disabled:bg-blue-300">
                 Gönder
               </button>
             </div>

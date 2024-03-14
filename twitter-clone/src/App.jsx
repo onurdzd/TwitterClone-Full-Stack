@@ -6,13 +6,15 @@ import MiddleBar from "./components/MiddleBar";
 import RightBar from "./components/RightBar";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { toast } from "react-toastify";
+// import axios from "axios";
+import { fetchTweets, sendTweet } from "./redux/reducers/tweetSlice";
 
 function App() {
   const [tweets, setTweets] = useState([]);
   const [textedTweet, setTextedTweet] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const username = useSelector((item) => item.loginStatus.value.username);
   const loginStatus = useSelector((state) => state.loginStatus.value);
   const [profilMenuOn, setprofilMenuOn] = useState(false);
 
@@ -23,10 +25,6 @@ function App() {
     }
   };
 
-  const tweetSendToastify = () => toast("Tweet Gönderildi!");
-  const username = useSelector((item) => item.loginStatus.value.username);
-  const dispatch=useDispatch()
-
   useEffect(() => {
     if (!loginStatus.loginStatus) {
       alert("Önce login olmalısın!");
@@ -34,57 +32,23 @@ function App() {
     }
   }, [loginStatus]);
 
-  const getTweets = async () => {
-    if (loginStatus.mockStatus != "true") {
-      await axios
-        .get(`${import.meta.env.VITE_API_URL}tweet`)
-        .then((res) => {
-          setTweets(res.data);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      await axios
-        .get(`${import.meta.env.VITE_API_MOCK_URL}tweets`)
-        .then((res) => {
-          setTweets(res.data);
-        })
-        .catch((err) => console.log(err));
+  let tweetsLength=tweets.length
+
+  const handleSendTweet = async() => {
+    setTextedTweet(""); // Gönderildikten sonra input'u temizle veya başka bir işlem yapabilirsiniz
+    const result = await dispatch(sendTweet({ textedTweet, username, loginStatus, handleGetTweet,tweetsLength }));;
+    if (loginStatus.mockStatus == "true"){
+      setTweets([...tweets, result.payload])
     }
   };
-  
-  const sendTweet = () => {
-    setTextedTweet("");
-    if (loginStatus.mockStatus != "true") {
-    axios
-      .post(`${import.meta.env.VITE_API_URL}tweet`, {
-        userId: loginStatus.localId,
-        tweetText: textedTweet,
-        tweetUsername: username,
-      })
-      .then((response) => {
-        tweetSendToastify();
-        getTweets();
-      })
-      .catch((err) => console.log(err.response.data.errors));
-  }else{
-    axios
-    .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
-      id:tweets.length==2 ? 4 :tweets.length==1 ? 5 : tweets.length==0 ? 6 : tweets.length+1,
-      userId: loginStatus.localId,
-      tweetUsername: username,
-      tweetText: textedTweet,
-      tweetCreatedAt:Date.now(),
-      name:localStorage.getItem("name"),
-    })
-    .then((response) => {
-      tweetSendToastify();
-      setTweets([...tweets, response.data])
-    })
-    .catch((err) => console.log(err.response.data.errors));
-  }}
+
+  const handleGetTweet = async () => {
+    const result = await dispatch(fetchTweets({ loginStatus }));
+    setTweets(result.payload);
+  };
 
   useEffect(() => {
-    getTweets();
+    handleGetTweet();
   }, []);
 
   useEffect(() => {
@@ -96,6 +60,60 @@ function App() {
       window.removeEventListener("click", handleClickOutside);
     };
   }, [profilMenuOn]);
+
+  //before redux
+  // const getTweets = async () => {
+  //   if (loginStatus.mockStatus != "true") {
+  //     await axios
+  //       .get(`${import.meta.env.VITE_API_URL}tweet`)
+  //       .then((res) => {
+  //         setTweets(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   } else {
+  //     await axios
+  //       .get(`${import.meta.env.VITE_API_MOCK_URL}tweets`)
+  //       .then((res) => {
+  //         setTweets(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
+
+  // const sendTweet = () => {
+  //   setTextedTweet("");
+  //   if (loginStatus.mockStatus != "true") {
+  //   axios
+  //     .post(`${import.meta.env.VITE_API_URL}tweet`, {
+  //       userId: loginStatus.localId,
+  //       tweetText: textedTweet,
+  //       tweetUsername: username,
+  //     })
+  //     .then((response) => {
+  //       tweetSendToastify();
+  //       getTweets();
+  //     })
+  //     .catch((err) => console.log(err.response.data.errors));
+  // }else{
+  //   axios
+  //   .post(`${import.meta.env.VITE_API_MOCK_URL}tweets`, {
+  //     id:tweets.length==2 ? 4 :tweets.length==1 ? 5 : tweets.length==0 ? 6 : tweets.length+1,
+  //     userId: loginStatus.localId,
+  //     tweetUsername: username,
+  //     tweetText: textedTweet,
+  //     tweetCreatedAt:Date.now(),
+  //     name:localStorage.getItem("name"),
+  //   })
+  //   .then((response) => {
+  //     tweetSendToastify();
+  //     setTweets([...tweets, response.data])
+  //   })
+  //   .catch((err) => console.log(err.response.data.errors));
+  // }}
+
+  // useEffect(() => {
+  //   getTweets();
+  // }, []);
 
   return (
     <>
@@ -112,14 +130,14 @@ function App() {
             <main className="flex justify-end">
               <MiddleBar
                 tweets={tweets}
-                getTweets={getTweets}
+                handleGetTweet={handleGetTweet}
                 setTweets={setTweets}
                 textedTweet={textedTweet}
                 setTextedTweet={setTextedTweet}
                 gonderButtonRef={gonderButtonRef}
                 profilMenuOn={profilMenuOn}
                 setprofilMenuOn={setprofilMenuOn}
-                sendTweet={sendTweet}
+                handleSendTweet={handleSendTweet}
               ></MiddleBar>
               <RightBar></RightBar>
             </main>
@@ -153,7 +171,10 @@ function App() {
                 </div>
               </nav>
             </footer>
-            <div onClick={() => navigate("/sendtweetmobile")} className="fixed right-10 bottom-14 bg-[#1d9bf0] cursor-pointer rounded-full w-fit p-2 mt-3 scale-110 hover:bg-blue-500 mx-auto">
+            <div
+              onClick={() => navigate("/sendtweetmobile")}
+              className="fixed right-10 bottom-14 bg-[#1d9bf0] cursor-pointer rounded-full w-fit p-2 mt-3 scale-110 hover:bg-blue-500 mx-auto"
+            >
               <svg width="25" height="25" fill="white">
                 <path d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z"></path>
               </svg>

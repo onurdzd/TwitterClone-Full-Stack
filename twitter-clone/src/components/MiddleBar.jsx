@@ -8,13 +8,13 @@ import mercedes from "../assets/mercedes.jpeg";
 const MiddleBar = (props) => {
   const {
     tweets,
-    getTweets,
+    handleGetTweet,
     setTweets,
     textedTweet,
     setTextedTweet,
     gonderButtonRef,
     setprofilMenuOn,
-    sendTweet
+    handleSendTweet
   } = props;
 
   const navigate = useNavigate();
@@ -132,7 +132,7 @@ const MiddleBar = (props) => {
                   <div className="pr-2">
                     <button
                       disabled={textedTweet == ""}
-                      onClick={sendTweet}
+                      onClick={handleSendTweet}
                       className="bg-[#1d9bf0] rounded-full px-4 py-2 lg:min-w-[50px] text-white font-bold disabled:bg-blue-300"
                     >
                       Gönder
@@ -149,7 +149,7 @@ const MiddleBar = (props) => {
               })
               .map((tweet, index) => (
                 <div key={index}>
-                  <Tweets tweet={tweet} tweets={tweets} getTweets={getTweets} setTweets={setTweets}></Tweets>
+                  <Tweets tweet={tweet} tweets={tweets} handleGetTweet={handleGetTweet} setTweets={setTweets}></Tweets>
                 </div>
               ))
           ) : (localStorage.getItem("username")!="errorTrue" ?
